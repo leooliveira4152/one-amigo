@@ -1,5 +1,3 @@
-// TODO - remove this
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { Box } from "@mui/material";
@@ -8,6 +6,7 @@ import { useUserStore } from "../store/user";
 import { useRouter } from "next/navigation";
 import { LoginButton } from "./LoginButton";
 import { useDialogStore } from "../store/dialog";
+import { Logo } from "@/components/Logo";
 
 export enum LoginTestIds {
   ROOT = "login-root",
@@ -28,14 +27,9 @@ export function Login() {
     <Box
       data-testid={LoginTestIds.ROOT}
       className="flex flex-col h-full justify-evenly w-7/12">
-      {/* TODO - SVG logo */}
-      <img
+      <Logo
         data-testid={LoginTestIds.LOGO}
-        alt="logo"
-        src={"/logo.png"}
-        width={500}
-        height={500}
-        className="w-8/12 max-w-md self-center"
+        className="w-9/12 max-w-md self-center"
       />
       <Box
         data-testid={LoginTestIds.BUTTON_CONTAINER}
