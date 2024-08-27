@@ -1,11 +1,13 @@
-import React from "react";
+import { faker } from "@faker-js/faker";
+import { configureStore } from "@reduxjs/toolkit";
 import { render, renderHook, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { configureStore } from "@reduxjs/toolkit";
-import { Provider } from "react-redux";
 import { User } from "firebase/auth"; // Assuming you have a mock User type
-import { userSlice, useUserStore } from "./user";
-import { faker } from "@faker-js/faker";
+import React from "react";
+import { Provider } from "react-redux";
+
+import { useUserStore, userSlice } from "./user";
+
 
 const mockUser = {
   uid: faker.string.alphanumeric(),

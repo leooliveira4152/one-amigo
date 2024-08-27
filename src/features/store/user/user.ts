@@ -1,6 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { useAppDispatch, useAppSelector } from "../store";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { User } from "firebase/auth";
+
+import { useAppDispatch, useAppSelector } from "../store";
 
 const LOCAL_STORAGE_SPECTATOR_KEY = "one-amigo-spectator";
 

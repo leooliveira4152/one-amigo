@@ -1,10 +1,11 @@
 import "@testing-library/jest-dom";
-import { createUser } from "./createUser";
+import { faker } from "@faker-js/faker";
 import { User } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { faker } from "@faker-js/faker";
-import { CollectionsEnum } from "../types";
+
+import { createUser } from "./createUser";
 import { firestoreDatabase } from "../client";
+import { CollectionsEnum } from "../types";
 
 jest.mock("../client");
 jest.mock("firebase/firestore");

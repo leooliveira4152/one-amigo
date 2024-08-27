@@ -1,10 +1,11 @@
-import React from "react";
+import { faker } from "@faker-js/faker";
+import { configureStore } from "@reduxjs/toolkit";
 import { render, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { configureStore } from "@reduxjs/toolkit";
+import React from "react";
 import { Provider } from "react-redux";
+
 import { dialogSlice, useDialogStore } from "./dialog";
-import { faker } from "@faker-js/faker";
 
 describe("dialogSlice", () => {
   const initialState = dialogSlice.getInitialState();

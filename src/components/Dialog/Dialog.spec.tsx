@@ -1,8 +1,9 @@
-import "@testing-library/jest-dom";
-import { fireEvent, render, within } from "@testing-library/react";
-import { Dialog, DialogIds } from "./Dialog";
-import { useDialogStore } from "@/features/store/dialog";
 import { faker } from "@faker-js/faker";
+import { fireEvent, render, within } from "@testing-library/react";
+
+import { useDialogStore } from "@/features/store/dialog";
+
+import { Dialog, DialogIds } from "./Dialog";
 
 const mockContent = faker.lorem.sentence();
 const mockTitle = faker.lorem.sentence();

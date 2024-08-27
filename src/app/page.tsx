@@ -1,5 +1,5 @@
-import { Welcome } from "@/components/Welcome";
+import { PlayArea } from "@/features/playArea";
 
 export default function Home() {
-  return <Welcome />;
+  return <PlayArea />;
 }

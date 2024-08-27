@@ -1,6 +1,7 @@
 import { render } from "@testing-library/react";
-import { LogoIconTestIds, LogoIconWrapper } from "./LogoIcon";
 import { ComponentProps } from "react";
+
+import { LogoIconTestIds, LogoIconWrapper } from "./LogoIcon";
 
 describe("<LogoIcon />", () => {
   const setup = (override?: ComponentProps<typeof LogoIconWrapper>) =>

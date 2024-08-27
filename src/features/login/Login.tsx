@@ -1,12 +1,15 @@
 "use client";
 
 import { Box } from "@mui/material";
-import { useLogout, useSignInWithGooglePopup } from "../firebase/auth";
-import { useUserStore } from "../store/user";
 import { useRouter } from "next/navigation";
-import { LoginButton } from "./LoginButton";
-import { useDialogStore } from "../store/dialog";
+
 import { Logo } from "@/components/Logo";
+
+import { LoginButton } from "./LoginButton";
+import { useLogout, useSignInWithGooglePopup } from "../firebase/auth";
+import { useDialogStore } from "../store/dialog";
+import { useUserStore } from "../store/user";
+
 
 export enum LoginTestIds {
   ROOT = "login-root",
@@ -26,10 +29,10 @@ export function Login() {
   return (
     <Box
       data-testid={LoginTestIds.ROOT}
-      className="flex flex-col h-full justify-evenly w-7/12">
+      className="flex flex-col h-full justify-evenly w-10/12 sm:w-7/12">
       <Logo
         data-testid={LoginTestIds.LOGO}
-        className="w-9/12 max-w-md self-center"
+        className="w-full sm:w-9/12 max-w-md self-center"
       />
       <Box
         data-testid={LoginTestIds.BUTTON_CONTAINER}

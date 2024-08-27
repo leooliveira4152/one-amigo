@@ -1,10 +1,11 @@
 "use client";
 
-import { useLogout, useSignInWithGooglePopup } from "@/features/firebase/auth";
-import { useUserStore } from "@/features/store/user";
 import { Box, Button } from "@mui/material";
 import { usePathname } from "next/navigation";
 import { ComponentProps } from "react";
+
+import { useLogout, useSignInWithGooglePopup } from "@/features/firebase/auth";
+import { useUserStore } from "@/features/store/user";
 
 export enum FooterIds {
   ROOT = "footer-root",
@@ -48,7 +49,7 @@ export function Footer() {
   function getCommonButtonProps() {
     return {
       variant: "contained",
-      className: "w-32 h-9 rounded-full",
+      className: "w-32 h-9 !rounded-full",
     } as Partial<ComponentProps<typeof Button>>;
   }
 }

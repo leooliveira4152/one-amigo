@@ -1,5 +1,6 @@
 import { render } from "@testing-library/react";
 import { ComponentProps } from "react";
+
 import { LogoTextTestIds, LogoTextWrapper } from "./LogoText";
 
 describe("<LogoIcon />", () => {

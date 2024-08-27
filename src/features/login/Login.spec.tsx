@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import "@testing-library/jest-dom";
 import { fireEvent, render, within } from "@testing-library/react";
+
 import { Login, LoginTestIds } from "./Login";
 
 let signInResolve: any;
@@ -40,7 +41,6 @@ jest.mock("../firebase/auth", () => ({
 describe("<Login />", () => {
   const setup = () => render(<Login />);
 
-  // TODO - improve this test when improving image too
   it("should render the root component and its logo", () => {
     const { getByTestId } = setup();
     getByTestId(LoginTestIds.ROOT);

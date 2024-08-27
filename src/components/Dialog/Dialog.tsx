@@ -1,5 +1,6 @@
+import { DialogContent, DialogTitle, Dialog as MuiDialog } from "@mui/material";
 import React from "react";
-import { Dialog as MuiDialog, DialogContent, DialogTitle } from "@mui/material";
+
 import { useDialogStore } from "@/features/store/dialog";
 
 export enum DialogIds {

@@ -1,4 +1,5 @@
 import { SVGProps } from "react";
+
 import { LogoIcon } from "../LogoIcon";
 import { LogoText } from "../LogoText";
 

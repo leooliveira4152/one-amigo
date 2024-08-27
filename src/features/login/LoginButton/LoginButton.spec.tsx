@@ -1,5 +1,6 @@
 import "@testing-library/jest-dom";
 import { fireEvent, render } from "@testing-library/react";
+
 import { LoginButton } from "./LoginButton";
 
 const BUTTON_TEST_ID = "login-button-test-id";

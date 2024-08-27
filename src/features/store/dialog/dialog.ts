@@ -1,6 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { useAppDispatch, useAppSelector } from "../store";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { ReactNode } from "react";
+
+import { useAppDispatch, useAppSelector } from "../store";
 
 type ContentType = { title?: ReactNode; content?: ReactNode };
 type DialogState = { dialog: { open: boolean; content: ContentType } };

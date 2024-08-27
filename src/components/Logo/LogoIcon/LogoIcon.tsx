@@ -27,13 +27,13 @@ function LogoIcon() {
           x2="404"
           y2="321"
           gradientUnits="userSpaceOnUse">
-          <stop offset="0" stop-color="#d363d3" />
-          <stop offset=".04" stop-color="#c75cce" />
-          <stop offset=".16" stop-color="#a94bc4" />
-          <stop offset=".28" stop-color="#943ebd" />
-          <stop offset=".4" stop-color="#8737b8" />
-          <stop offset=".51" stop-color="#8335b7" />
-          <stop offset="1" stop-color="#ca5dd0" />
+          <stop offset="0" stopColor="#d363d3" />
+          <stop offset=".04" stopColor="#c75cce" />
+          <stop offset=".16" stopColor="#a94bc4" />
+          <stop offset=".28" stopColor="#943ebd" />
+          <stop offset=".4" stopColor="#8737b8" />
+          <stop offset=".51" stopColor="#8335b7" />
+          <stop offset="1" stopColor="#ca5dd0" />
         </linearGradient>
         <linearGradient
           id={GradientIds.SMALL_RING_OUTER}
@@ -42,13 +42,13 @@ function LogoIcon() {
           x2="912.94"
           y2="232.46"
           gradientUnits="userSpaceOnUse">
-          <stop offset=".27" stop-color="#d363d3" />
-          <stop offset=".3" stop-color="#be56cb" />
-          <stop offset=".34" stop-color="#a84ac4" />
-          <stop offset=".38" stop-color="#9740be" />
-          <stop offset=".44" stop-color="#8b39ba" />
-          <stop offset=".51" stop-color="#8436b7" />
-          <stop offset=".73" stop-color="#d363d3" />
+          <stop offset=".27" stopColor="#d363d3" />
+          <stop offset=".3" stopColor="#be56cb" />
+          <stop offset=".34" stopColor="#a84ac4" />
+          <stop offset=".38" stopColor="#9740be" />
+          <stop offset=".44" stopColor="#8b39ba" />
+          <stop offset=".51" stopColor="#8436b7" />
+          <stop offset=".73" stopColor="#d363d3" />
         </linearGradient>
         <linearGradient
           id={GradientIds.SMALL_PLANET}
@@ -57,10 +57,10 @@ function LogoIcon() {
           x2="429.28"
           y2="737.02"
           gradientUnits="userSpaceOnUse">
-          <stop offset=".11" stop-color="#8335b7" />
-          <stop offset=".3" stop-color="#8e3bbb" />
-          <stop offset=".66" stop-color="#ae4dc6" />
-          <stop offset="1" stop-color="#d363d3" />
+          <stop offset=".11" stopColor="#8335b7" />
+          <stop offset=".3" stopColor="#8e3bbb" />
+          <stop offset=".66" stopColor="#ae4dc6" />
+          <stop offset="1" stopColor="#d363d3" />
         </linearGradient>
         <linearGradient
           id={GradientIds.LARGE_STAR}
@@ -69,11 +69,11 @@ function LogoIcon() {
           x2="671.43"
           y2="217.63"
           gradientUnits="userSpaceOnUse">
-          <stop offset=".34" stop-color="#6822b0" />
-          <stop offset=".52" stop-color="#8c38bc" />
-          <stop offset=".73" stop-color="#b24fc8" />
-          <stop offset=".89" stop-color="#ca5dd0" />
-          <stop offset="1" stop-color="#d363d3" />
+          <stop offset=".34" stopColor="#6822b0" />
+          <stop offset=".52" stopColor="#8c38bc" />
+          <stop offset=".73" stopColor="#b24fc8" />
+          <stop offset=".89" stopColor="#ca5dd0" />
+          <stop offset="1" stopColor="#d363d3" />
         </linearGradient>
         <linearGradient
           id={GradientIds.SMALL_STAR}
@@ -82,11 +82,11 @@ function LogoIcon() {
           x2="737.41"
           y2="240.24"
           gradientUnits="userSpaceOnUse">
-          <stop offset=".22" stop-color="#8335b7" />
-          <stop offset=".23" stop-color="#8335b7" />
-          <stop offset=".57" stop-color="#ae4dc6" />
-          <stop offset=".84" stop-color="#c95dcf" />
-          <stop offset="1" stop-color="#d363d3" />
+          <stop offset=".22" stopColor="#8335b7" />
+          <stop offset=".23" stopColor="#8335b7" />
+          <stop offset=".57" stopColor="#ae4dc6" />
+          <stop offset=".84" stopColor="#c95dcf" />
+          <stop offset="1" stopColor="#d363d3" />
         </linearGradient>
         <linearGradient
           id={GradientIds.MEDIUM_STAR}
@@ -95,12 +95,12 @@ function LogoIcon() {
           x2="794.47"
           y2="633.69"
           gradientUnits="userSpaceOnUse">
-          <stop offset=".34" stop-color="#8335b7" />
-          <stop offset=".41" stop-color="#9e44c0" />
-          <stop offset=".49" stop-color="#b552c8" />
-          <stop offset=".58" stop-color="#c65bce" />
-          <stop offset=".68" stop-color="#cf61d1" />
-          <stop offset=".8" stop-color="#d363d3" />
+          <stop offset=".34" stopColor="#8335b7" />
+          <stop offset=".41" stopColor="#9e44c0" />
+          <stop offset=".49" stopColor="#b552c8" />
+          <stop offset=".58" stopColor="#c65bce" />
+          <stop offset=".68" stopColor="#cf61d1" />
+          <stop offset=".8" stopColor="#d363d3" />
         </linearGradient>
         <linearGradient
           id={GradientIds.LARGE_RING}
@@ -109,17 +109,17 @@ function LogoIcon() {
           x2="101.97"
           y2="442.36"
           gradientUnits="userSpaceOnUse">
-          <stop offset="0" stop-color="#5810b0" />
-          <stop offset=".13" stop-color="#7624b8" />
-          <stop offset=".4" stop-color="#c257ce" />
-          <stop offset=".46" stop-color="#d363d3" />
-          <stop offset=".52" stop-color="#cf61d1" />
-          <stop offset=".57" stop-color="#c55cce" />
-          <stop offset=".62" stop-color="#b454c7" />
-          <stop offset=".67" stop-color="#9d48bf" />
-          <stop offset=".71" stop-color="#813bb5" />
-          <stop offset=".77" stop-color="#722bb3" />
-          <stop offset=".84" stop-color="#5810b0" />
+          <stop offset="0" stopColor="#5810b0" />
+          <stop offset=".13" stopColor="#7624b8" />
+          <stop offset=".4" stopColor="#c257ce" />
+          <stop offset=".46" stopColor="#d363d3" />
+          <stop offset=".52" stopColor="#cf61d1" />
+          <stop offset=".57" stopColor="#c55cce" />
+          <stop offset=".62" stopColor="#b454c7" />
+          <stop offset=".67" stopColor="#9d48bf" />
+          <stop offset=".71" stopColor="#813bb5" />
+          <stop offset=".77" stopColor="#722bb3" />
+          <stop offset=".84" stopColor="#5810b0" />
         </linearGradient>
       </defs>
       <g data-testid={LogoIconTestIds.GROUP}>

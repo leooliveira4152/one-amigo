@@ -1,9 +1,11 @@
 import "@testing-library/jest-dom";
-import { useSignInWithGooglePopup } from "./useSignInWithGooglePopup";
-import { auth } from "../auth";
-import { signInWithPopup } from "firebase/auth";
-import { createUser } from "../../firestore/createUser";
 import { renderHook } from "@testing-library/react";
+import { signInWithPopup } from "firebase/auth";
+
+import { useSignInWithGooglePopup } from "./useSignInWithGooglePopup";
+import { createUser } from "../../firestore/createUser";
+import { auth } from "../auth";
+
 
 const mockSetIsSpectator = jest.fn();
 const mockRoutePush = jest.fn();

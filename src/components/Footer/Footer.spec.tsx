@@ -1,9 +1,12 @@
 import "@testing-library/jest-dom";
 import { fireEvent, render } from "@testing-library/react";
-import { Footer, FooterIds } from "./Footer";
-import { useUserStore } from "@/features/store/user";
-import { usePathname } from "next/navigation";
 import { User } from "firebase/auth";
+import { usePathname } from "next/navigation";
+
+import { useUserStore } from "@/features/store/user";
+
+import { Footer, FooterIds } from "./Footer";
+
 
 const mockUserStore = {
   currentUser: {} as User,

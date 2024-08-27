@@ -1,8 +1,9 @@
 import "@testing-library/jest-dom";
+import { renderHook } from "@testing-library/react";
+import { signOut } from "firebase/auth";
+
 import { useLogout } from "./useLogout";
 import { auth } from "../auth";
-import { signOut } from "firebase/auth";
-import { renderHook } from "@testing-library/react";
 
 const mockSetCurrentUser = jest.fn();
 const mockReplace = jest.fn();

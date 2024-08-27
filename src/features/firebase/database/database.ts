@@ -2,9 +2,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import { getDatabase, onValue, ref, set } from "firebase/database";
-import { app } from "../client";
-import { DatabaseModel } from "./types";
 import { DependencyList, useEffect } from "react";
+
+import { DatabaseModel } from "./types";
+import { app } from "../client";
 
 const database = getDatabase(app);
 

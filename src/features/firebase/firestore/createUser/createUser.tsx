@@ -1,6 +1,7 @@
-import { doc, getDoc, setDoc } from "firebase/firestore";
-import { firestoreDatabase } from "../client";
 import { User } from "firebase/auth";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+
+import { firestoreDatabase } from "../client";
 import { CollectionsEnum, FirestoreUser } from "../types";
 
 export async function createUser(user: User) {
