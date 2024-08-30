@@ -71,7 +71,17 @@ export const usePlayAreaStore = () => {
 
       // Should not resize in a way that the screen isn't covered by map
       // The initial map resize doesn't have the right params defined, so we should force the rescale
-      if (!options?.forceScale && mapOverflow) return;
+      if (mapOverflow && !options?.forceScale) {
+        const dimensionsDifferences = {
+          width: stageDimensions.width - mapDimensions.width,
+          height: stageDimensions.height - mapDimensions.height,
+        };
+
+        if (dimensionsDifferences.width > dimensionsDifferences.height)
+          scale = stageDimensions.height / mapDimensions.height;
+        else scale = stageDimensions.width / mapDimensions.width;
+      }
+
       dispatch(playAreaSlice.actions.changeStageScale(scale));
     },
     changeStagePosition: (position: Coordinates, updatedScale?: number) => {

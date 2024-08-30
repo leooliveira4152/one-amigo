@@ -169,11 +169,26 @@ describe("playArea", () => {
             },
           };
 
-          it("should NOT change scale if forceScale isn't true", () => {
+          it("should limit the change scale if forceScale isn't true", () => {
             jest.mocked(useAppSelector).mockReturnValueOnce(mockPlayArea);
+            const {
+              playArea: { stageDimensions, mapDimensions },
+            } = mockPlayArea;
             const { result } = setup();
             result.current.changeStageScale(mockUpdatedScale);
-            expect(mockDispatch).not.toHaveBeenCalled();
+
+            const dimensionsDifferences = {
+              width: stageDimensions.width - mapDimensions.width,
+              height: stageDimensions.height - mapDimensions.height,
+            };
+
+            let scale = mockUpdatedScale;
+            if (dimensionsDifferences.width > dimensionsDifferences.height)
+              scale = stageDimensions.height / mapDimensions.height;
+            else scale = stageDimensions.width / mapDimensions.width;
+            expect(mockDispatch).toHaveBeenCalledWith(
+              playAreaSlice.actions.changeStageScale(scale)
+            );
           });
 
           it("should change scale if forceScale is true", () => {
@@ -202,13 +217,27 @@ describe("playArea", () => {
             },
           };
 
-          it("should NOT change scale if forceScale isn't true", () => {
+          it("should limit the change scale if forceScale isn't true", () => {
             jest.mocked(useAppSelector).mockReturnValueOnce(mockPlayArea);
+            const {
+              playArea: { stageDimensions, mapDimensions },
+            } = mockPlayArea;
             const { result } = setup();
             result.current.changeStageScale(mockUpdatedScale);
-            expect(mockDispatch).not.toHaveBeenCalled();
-          });
 
+            const dimensionsDifferences = {
+              width: stageDimensions.width - mapDimensions.width,
+              height: stageDimensions.height - mapDimensions.height,
+            };
+
+            let scale = mockUpdatedScale;
+            if (dimensionsDifferences.width > dimensionsDifferences.height)
+              scale = stageDimensions.height / mapDimensions.height;
+            else scale = stageDimensions.width / mapDimensions.width;
+            expect(mockDispatch).toHaveBeenCalledWith(
+              playAreaSlice.actions.changeStageScale(scale)
+            );
+          });
           it("should change scale if forceScale is true", () => {
             jest.mocked(useAppSelector).mockReturnValueOnce(mockPlayArea);
             const { result } = setup();

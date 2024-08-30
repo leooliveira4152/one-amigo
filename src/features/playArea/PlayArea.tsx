@@ -30,6 +30,7 @@ export function PlayArea() {
         <Layer
           scaleX={stageScale}
           scaleY={stageScale}
+          // Be aware that, as of 30-08-2024, Brave Shield blocks onWheel for some reason
           onWheel={onWheel}
           {...stagePosition}>
           <Map />
