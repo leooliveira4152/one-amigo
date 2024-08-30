@@ -1,7 +1,12 @@
 "use client";
 
+// eslint-disable-next-line import/order
+import { firebaseConfig } from "@/features/firebase/client";
+initializeApp(firebaseConfig);
+
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { deepPurple, pink } from "@mui/material/colors";
+import { initializeApp } from "firebase/app";
 import { User } from "firebase/auth";
 import { usePathname, useRouter } from "next/navigation";
 import { PropsWithChildren, useEffect, useMemo, useRef } from "react";
