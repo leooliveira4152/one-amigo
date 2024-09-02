@@ -1,4 +1,3 @@
-import { dialogSlice } from "./dialog";
 import { playAreaSlice } from "./playArea";
 import { makeStore } from "./store";
 import { userSlice } from "./user";
@@ -9,7 +8,6 @@ describe("store", () => {
 
     expect(store.getState()).toEqual({
       user: userSlice.getInitialState(),
-      dialog: dialogSlice.getInitialState(),
       playArea: playAreaSlice.getInitialState(),
     });
   });

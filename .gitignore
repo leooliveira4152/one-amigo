@@ -39,6 +39,7 @@ next-env.d.ts
 # assets
 /.alt
 /.mapas
+/.characters
 *.psd
 
 # firebase

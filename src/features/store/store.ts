@@ -1,7 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector, useStore } from "react-redux";
 
-import { dialogSlice } from "./dialog";
 import { playAreaSlice } from "./playArea";
 import { userSlice } from "./user";
 
@@ -9,7 +8,6 @@ export const makeStore = () => {
   return configureStore({
     reducer: {
       user: userSlice.reducer,
-      dialog: dialogSlice.reducer,
       playArea: playAreaSlice.reducer,
     },
   });

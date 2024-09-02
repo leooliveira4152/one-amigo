@@ -12,8 +12,9 @@ import { usePathname, useRouter } from "next/navigation";
 import { PropsWithChildren, useEffect, useMemo, useRef } from "react";
 import { Provider } from "react-redux";
 
-import { Dialog } from "@/components/Dialog";
 import { Footer } from "@/components/Footer";
+import { DialogProvider } from "@/features/context/DialogContext";
+import { DrawerProvider } from "@/features/context/DrawerContext";
 import { auth } from "@/features/firebase/auth/auth";
 import { AppStore, makeStore } from "@/features/store";
 import { useUserStore } from "@/features/store/user";
@@ -59,18 +60,17 @@ export function LayoutWrapper({ children }: PropsWithChildren) {
 
   return (
     <ThemeProvider theme={theme}>
-      <body className="flex flex-col h-dvh">
-        <CssBaseline />
-        <div className="flex flex-col flex-1 items-center justify-between p-2 h-full sm:p-12">
-          {enableRender && (
-            <>
-              <Dialog />
-              {children}
-            </>
-          )}
-        </div>
-        <Footer />
-      </body>
+      <DrawerProvider>
+        <DialogProvider>
+          <body className="flex flex-col h-dvh">
+            <CssBaseline />
+            <div className="flex flex-col flex-1 items-center justify-between p-2 h-full sm:p-12">
+              {enableRender && children}
+            </div>
+            <Footer />
+          </body>
+        </DialogProvider>
+      </DrawerProvider>
     </ThemeProvider>
   );
 }

@@ -1,0 +1,77 @@
+import { Dialog, DialogContent, DialogTitle } from "@mui/material";
+import {
+  ComponentProps,
+  createContext,
+  PropsWithChildren,
+  ReactNode,
+  useContext,
+  useState,
+} from "react";
+
+export enum DialogIds {
+  ROOT = "dialog-root",
+  TITLE = "dialog-title",
+  CONTENT = "dialog-content",
+}
+
+type OpenDialogProps = {
+  content: ReactNode;
+} & ComponentProps<typeof Dialog>;
+
+type DialogContextType = {
+  openDialog: (props: OpenDialogProps) => void;
+  closeDialog: () => void;
+};
+
+const defaultValues = { openDialog: () => {}, closeDialog: () => {} };
+const DialogContext = createContext<DialogContextType>(defaultValues);
+
+// TODO - create unit
+
+export const DialogProvider = ({ children }: PropsWithChildren) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [title, setTitle] = useState<ReactNode>(undefined);
+  const [content, setContent] = useState<ReactNode>(undefined);
+  const [dialogProps, setDialogProps] = useState<
+    Partial<ComponentProps<typeof Dialog>>
+  >({});
+
+  // TODO - check mobile
+  // TODO - transition props to clear after close?
+  return (
+    <DialogContext.Provider
+      value={{ closeDialog: closeDialog, openDialog: openDialog }}>
+      <Dialog
+        data-testid={DialogIds.ROOT}
+        open={isOpen}
+        onClose={closeDialog}
+        TransitionProps={{ onExited: clearDialogContent }}
+        {...dialogProps}>
+        {title && (
+          <DialogTitle data-testid={DialogIds.TITLE}>{title}</DialogTitle>
+        )}
+        <DialogContent data-testid={DialogIds.CONTENT}>{content}</DialogContent>
+      </Dialog>
+      {children}
+    </DialogContext.Provider>
+  );
+
+  function openDialog({ content, ...props }: OpenDialogProps) {
+    setContent(content);
+    setDialogProps(props);
+    setIsOpen(true);
+  }
+
+  function closeDialog() {
+    setIsOpen(false);
+  }
+
+  function clearDialogContent() {
+    setTitle(undefined);
+    setContent(undefined);
+  }
+};
+
+export const useDialogContext = () => {
+  return useContext(DialogContext);
+};
