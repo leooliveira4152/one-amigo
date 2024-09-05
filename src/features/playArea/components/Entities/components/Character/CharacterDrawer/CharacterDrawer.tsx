@@ -1,5 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
 import { Box, Skeleton } from "@mui/material";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 
 import {
@@ -72,7 +72,7 @@ export function CharacterDrawer({ characterId }: CharacterDrawerProps) {
       );
 
     return (
-      <Image
+      <img
         data-testid={CharacterDrawerTestIds.IMAGE}
         alt={characterName}
         src={imageUrl}
