@@ -4,8 +4,10 @@ import Konva from "konva";
 import { RefObject } from "react";
 import { Image, Rect as Rect } from "react-konva";
 
-import { useGetStorageImage } from "@/features/firebase/storage";
-import { StorageDirectoriesEnum } from "@/features/firebase/storage/types";
+import {
+  StorageDirectoriesEnum,
+  useGetStorageImage,
+} from "@/features/firebase/storage";
 import { generateRandomObject } from "@/testUtils";
 
 import { Map } from "./Map";
@@ -29,6 +31,7 @@ jest.mock("./hooks", () => ({
 }));
 
 jest.mock("@/features/firebase/storage", () => ({
+  ...jest.requireActual("@/features/firebase/storage"),
   useGetStorageImage: jest.fn(() => ({
     imageElement: mockImageElement,
     dimensions: mockMapDimensions,
@@ -75,7 +78,6 @@ describe("<Map />", () => {
       );
       expect(Rect).toHaveBeenCalledWith(
         expect.objectContaining({
-          // TODO - someday figure out how to test if ref was passed
           draggable: true,
           ...mockMapDimensions,
           ...mockUseMoveStageResponse,

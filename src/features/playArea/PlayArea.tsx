@@ -3,11 +3,9 @@
 import { useRef } from "react";
 import { Layer, Stage } from "react-konva";
 
-import { Map, Background } from "./components";
+import { Map, Background, Entities } from "./components";
 import { useResizeObserver, useScrollHandler } from "./hooks";
 import { usePlayAreaStore } from "../store/playArea";
-
-// TODO - Test how this works on mobile
 
 export function PlayArea() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -34,6 +32,7 @@ export function PlayArea() {
           onWheel={onWheel}
           {...stagePosition}>
           <Map />
+          <Entities />
         </Layer>
       </Stage>
     </div>

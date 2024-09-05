@@ -2,8 +2,10 @@ import Konva from "konva";
 import { useRef } from "react";
 import { Image, Rect } from "react-konva";
 
-import { useGetStorageImage } from "@/features/firebase/storage";
-import { StorageDirectoriesEnum } from "@/features/firebase/storage/types";
+import {
+  StorageDirectoriesEnum,
+  useGetStorageImage,
+} from "@/features/firebase/storage";
 
 import { useMapDimensions, useMobileTouchHandler, useMoveStage } from "./hooks";
 

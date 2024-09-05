@@ -6,10 +6,9 @@ import { useRouter } from "next/navigation";
 import { Logo } from "@/components/Logo";
 
 import { LoginButton } from "./LoginButton";
+import { useDialogContext } from "../context/DialogContext";
 import { useLogout, useSignInWithGooglePopup } from "../firebase/auth";
-import { useDialogStore } from "../store/dialog";
 import { useUserStore } from "../store/user";
-
 
 export enum LoginTestIds {
   ROOT = "login-root",
@@ -21,7 +20,7 @@ export enum LoginTestIds {
 
 export function Login() {
   const router = useRouter();
-  const { openDialog } = useDialogStore();
+  const { openDialog } = useDialogContext();
   const { setIsSpectator } = useUserStore();
   const { signInWithGooglePopup } = useSignInWithGooglePopup();
   const { logout } = useLogout();

@@ -1,6 +1,5 @@
-import { Dialog, DialogContent, DialogTitle } from "@mui/material";
+import { Dialog, DialogContent, DialogProps, DialogTitle } from "@mui/material";
 import {
-  ComponentProps,
   createContext,
   PropsWithChildren,
   ReactNode,
@@ -16,7 +15,7 @@ export enum DialogIds {
 
 type OpenDialogProps = {
   content: ReactNode;
-} & ComponentProps<typeof Dialog>;
+} & Omit<Partial<DialogProps>, "content">;
 
 type DialogContextType = {
   openDialog: (props: OpenDialogProps) => void;
@@ -26,21 +25,17 @@ type DialogContextType = {
 const defaultValues = { openDialog: () => {}, closeDialog: () => {} };
 const DialogContext = createContext<DialogContextType>(defaultValues);
 
-// TODO - create unit
+// TODO - create Missing unit test
 
 export const DialogProvider = ({ children }: PropsWithChildren) => {
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState<ReactNode>(undefined);
   const [content, setContent] = useState<ReactNode>(undefined);
-  const [dialogProps, setDialogProps] = useState<
-    Partial<ComponentProps<typeof Dialog>>
-  >({});
+  const [dialogProps, setDialogProps] = useState<Partial<DialogProps>>({});
 
   // TODO - check mobile
-  // TODO - transition props to clear after close?
   return (
-    <DialogContext.Provider
-      value={{ closeDialog: closeDialog, openDialog: openDialog }}>
+    <DialogContext.Provider value={{ closeDialog, openDialog }}>
       <Dialog
         data-testid={DialogIds.ROOT}
         open={isOpen}

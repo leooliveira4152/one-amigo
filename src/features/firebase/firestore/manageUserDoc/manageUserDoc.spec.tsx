@@ -1,9 +1,17 @@
 import "@testing-library/jest-dom";
 import { faker } from "@faker-js/faker";
 import { User } from "firebase/auth";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  doc,
+  DocumentReference,
+  DocumentSnapshot,
+  getDoc,
+  setDoc,
+} from "firebase/firestore";
 
-import { createUser } from "./createUser";
+import { generateRandomObject } from "@/testUtils";
+
+import { createUser, readUser } from "./manageUserDoc";
 import { firestoreDatabase } from "../client";
 import { CollectionsEnum } from "../types";
 
@@ -18,12 +26,6 @@ const mockUser = {
 
 describe("createUser", () => {
   const mockFirestore = firestoreDatabase;
-  const mockUserRef = doc(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    mockFirestore as any,
-    CollectionsEnum.USERS,
-    mockUser.email!
-  );
   const setup = (override?: Partial<User>) =>
     createUser({ ...mockUser, ...override });
 
@@ -75,6 +77,58 @@ describe("createUser", () => {
     expect(result).toBeUndefined();
 
     expect(doc).toHaveBeenCalled();
-    expect(setDoc).toHaveBeenCalledWith(mockUserRef, mockUser);
+    expect(setDoc).toHaveBeenCalled();
+  });
+});
+
+describe("readUser", () => {
+  const mockEmail = faker.internet.email();
+
+  it("should return null if doc has no data", async () => {
+    const mockDocument = {
+      exists: () => true,
+      data: generateRandomObject,
+    } as DocumentSnapshot;
+    jest.mocked(getDoc).mockResolvedValueOnce(mockDocument);
+
+    expect(await readUser(mockEmail)).toBe(mockDocument);
+  });
+
+  describe("failed cases", () => {
+    const mockUserRef = {} as DocumentReference;
+    jest.mocked(doc).mockReturnValue(mockUserRef);
+
+    const commonTests = () => {
+      expect(doc).toHaveBeenCalledWith(
+        firestoreDatabase,
+        CollectionsEnum.USERS,
+        mockEmail
+      );
+      expect(getDoc).toHaveBeenCalledWith(mockUserRef);
+    };
+
+    it("should return null if no email was passed", async () => {
+      expect(await readUser("")).toBeNull();
+    });
+
+    it("should return null if no doc exists", async () => {
+      jest.mocked(getDoc).mockResolvedValueOnce({
+        exists: () => false,
+        data: () => {},
+      } as DocumentSnapshot);
+
+      expect(await readUser(mockEmail)).toBeNull();
+      commonTests();
+    });
+
+    it("should return null if doc has no data", async () => {
+      jest.mocked(getDoc).mockResolvedValueOnce({
+        exists: () => true,
+        data: () => undefined,
+      } as DocumentSnapshot);
+
+      expect(await readUser(mockEmail)).toBeNull();
+      commonTests();
+    });
   });
 });

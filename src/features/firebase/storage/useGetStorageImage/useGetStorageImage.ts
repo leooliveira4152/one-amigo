@@ -4,6 +4,7 @@ import useImage from "use-image";
 
 import { storage } from "../storage";
 
+// TODO - what if the image fails to load? Using a wrong URL
 export function useGetStorageImage(imagePath: string) {
   const [imageObject, setImageObject] = useState<HTMLImageElement>();
   const [imageUrl, setImageUrl] = useState<string>();

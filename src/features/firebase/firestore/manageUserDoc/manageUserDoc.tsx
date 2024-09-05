@@ -19,3 +19,13 @@ export async function createUser(user: User) {
 
   setDoc(userRef, filteredDocument);
 }
+
+export async function readUser(email: string) {
+  console.log("em", !email);
+  if (!email) return null;
+  const userRef = doc(firestoreDatabase, CollectionsEnum.USERS, email);
+  const document = await getDoc(userRef);
+  console.log("bbb", document.exists(), document.data());
+  if (!document.exists() || !document.data()) return null;
+  return document;
+}

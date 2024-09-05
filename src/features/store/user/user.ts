@@ -1,12 +1,13 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { User } from "firebase/auth";
+
+import { FirestoreUser } from "@/features/firebase/firestore";
 
 import { useAppDispatch, useAppSelector } from "../store";
 
 const LOCAL_STORAGE_SPECTATOR_KEY = "one-amigo-spectator";
 
 type UserState = {
-  currentUser: User | null;
+  currentUser: FirestoreUser | null;
   spectator: { isSpectator: boolean };
 };
 const initialState: UserState = {
@@ -18,7 +19,7 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setCurrentUser: (state, action: PayloadAction<User | null>) => {
+    setCurrentUser: (state, action: PayloadAction<FirestoreUser | null>) => {
       state.currentUser = action.payload;
     },
     setIsSpectator: (state, action: PayloadAction<boolean>) => {
@@ -37,7 +38,7 @@ export const useUserStore = () => {
 
   return {
     ...values,
-    setCurrentUser: (user: User | null) =>
+    setCurrentUser: (user: FirestoreUser | null) =>
       dispatch(userSlice.actions.setCurrentUser(user)),
     setIsSpectator: (isSpectator: boolean) =>
       dispatch(userSlice.actions.setIsSpectator(isSpectator)),

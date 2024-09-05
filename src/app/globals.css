@@ -8,6 +8,14 @@
   }
 }
 
+h2 {
+  font-size: 22px;
+}
+
+h3 {
+  font-size: 18px;
+}
+
 /* cyrillic-ext */
 @font-face {
   descent-override: 15%;

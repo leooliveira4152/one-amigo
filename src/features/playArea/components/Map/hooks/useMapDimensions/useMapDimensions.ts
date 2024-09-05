@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { Dimension } from "@/features/playArea/types";
+import { Dimension } from "@/features/playArea";
 import { usePlayAreaStore } from "@/features/store/playArea";
 
 export function useMapDimensions(mapDimensions?: Dimension) {

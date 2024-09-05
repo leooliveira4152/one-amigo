@@ -16,6 +16,7 @@ import { Footer } from "@/components/Footer";
 import { DialogProvider } from "@/features/context/DialogContext";
 import { DrawerProvider } from "@/features/context/DrawerContext";
 import { auth } from "@/features/firebase/auth/auth";
+import { readUser } from "@/features/firebase/firestore/manageUserDoc";
 import { AppStore, makeStore } from "@/features/store";
 import { useUserStore } from "@/features/store/user";
 
@@ -42,10 +43,12 @@ export function LayoutWrapper({ children }: PropsWithChildren) {
     const isSpectator = Boolean(localStorage.getItem(localStorageSpectatorKey));
     setIsSpectator(isSpectator);
 
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user)
-        setCurrentUser(user.toJSON() as User); // probably not the best approach
-      else if (!user && pathname !== "/login" && !isSpectator)
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      // TODO - probably not the best approach
+      if (user && user.email) {
+        const userDoc = await readUser(user.email);
+        setCurrentUser((userDoc?.data() ?? user.toJSON()) as User);
+      } else if (!user && pathname !== "/login" && !isSpectator)
         router.replace("/login");
     });
 

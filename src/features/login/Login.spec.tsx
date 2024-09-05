@@ -23,8 +23,8 @@ jest.mock("next/navigation", () => ({
   useRouter: jest.fn(() => ({ push: mockPush })),
 }));
 
-jest.mock("../store/dialog", () => ({
-  useDialogStore: jest.fn(() => ({ openDialog: mockOpenDialog })),
+jest.mock("../context/DialogContext", () => ({
+  useDialogContext: jest.fn(() => ({ openDialog: mockOpenDialog })),
 }));
 
 jest.mock("../store/user", () => ({

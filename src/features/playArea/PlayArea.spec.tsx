@@ -4,7 +4,7 @@ import { RefObject } from "react";
 import { Layer, Stage } from "react-konva";
 
 import { PlayArea } from "./PlayArea";
-import { Background, Map } from "./components";
+import { Background, Entities, Map } from "./components";
 import { useResizeObserver } from "./hooks";
 import { usePlayAreaStore } from "../store/playArea";
 
@@ -50,6 +50,7 @@ describe("<PlayArea />", () => {
     setup();
     expect(Background).toHaveBeenCalled();
     expect(Map).toHaveBeenCalled();
+    expect(Entities).toHaveBeenCalled();
   });
 
   it("should call useResizeObserver with the containerRef", () => {

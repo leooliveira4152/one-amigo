@@ -1,6 +1,5 @@
-import { Drawer } from "@mui/material";
+import { Drawer, DrawerProps } from "@mui/material";
 import {
-  ComponentProps,
   createContext,
   PropsWithChildren,
   ReactNode,
@@ -8,10 +7,9 @@ import {
   useState,
 } from "react";
 
-type OpenDrawerProps = {
+type OpenDrawerProps = Omit<Partial<DrawerProps>, "content"> & {
   content: ReactNode;
-} & ComponentProps<typeof Drawer>;
-
+};
 type DrawerContextType = {
   openDrawer: (props: OpenDrawerProps) => void;
   closeDrawer: () => void;
@@ -24,9 +22,7 @@ const DrawerContext = createContext<DrawerContextType>(defaultValues);
 export const DrawerProvider = ({ children }: PropsWithChildren) => {
   const [isOpen, setIsOpen] = useState(false);
   const [content, setContent] = useState<ReactNode>(undefined);
-  const [drawerProps, setDrawerProps] = useState<ComponentProps<typeof Drawer>>(
-    {}
-  );
+  const [drawerProps, setDrawerProps] = useState<Partial<DrawerProps>>({});
 
   // TODO - check mobile
   // TODO - transition props to clear after close?
