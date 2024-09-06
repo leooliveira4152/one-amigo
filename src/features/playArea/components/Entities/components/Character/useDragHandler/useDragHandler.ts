@@ -32,6 +32,18 @@ export function useDragHandler({
 
       setDragOffset({ x: offsetX, y: offsetY });
     },
+    onDragMove: (event: KonvaEventObject<DragEvent>) => {
+      const stage = event.target.getStage();
+      const pointerPosition = stage?.getPointerPosition();
+      if (!pointerPosition) return;
+
+      const newPosition = {
+        x: (pointerPosition.x - stagePosition.x - dragOffset.x) / stageScale,
+        y: (pointerPosition.y - stagePosition.y - dragOffset.y) / stageScale,
+      };
+
+      setCoordinates(newPosition);
+    },
     onDragEnd: (event: KonvaEventObject<DragEvent>) => {
       const stage = event.target.getStage();
       const pointerPosition = stage?.getPointerPosition();

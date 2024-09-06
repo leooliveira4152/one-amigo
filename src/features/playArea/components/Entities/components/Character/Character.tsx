@@ -8,18 +8,33 @@ import {
   useGetStorageImage,
 } from "@/features/firebase/storage";
 import { Coordinates } from "@/features/playArea";
+import {
+  DEFAULT_PERSON_HEIGHT_METERS,
+  METER_SIZE,
+} from "@/features/playArea/common";
 import { useUserStore } from "@/features/store/user";
 
 import { CharacterDrawer } from "./CharacterDrawer";
 import { useDragHandler } from "./useDragHandler";
 
+const CHARACTER_SIZE_NORMALIZER = 0.8; // Otherwise character height discrepancy would result in HUGE character icons for really tall characters
+const CIRCUMFERENCE_NORMALIZER = 0.8; // Otherwise characters icon would be too large,
+const BASE_TOP_SHADOW_SIZE = 5;
+const BASE_BOTTOM_SHADOW_SIZE = 10;
+
 type CharacterProps = ComponentProps<typeof Circle> & CharacterDatabaseType;
 export function Character({
   characterId,
   playAreaKey,
-  radius,
+  height,
   ...props
 }: CharacterProps) {
+  const heightProportionToDefaultHeight =
+    ((height ?? DEFAULT_PERSON_HEIGHT_METERS) / DEFAULT_PERSON_HEIGHT_METERS) **
+    CHARACTER_SIZE_NORMALIZER;
+  const radius =
+    heightProportionToDefaultHeight * METER_SIZE * CIRCUMFERENCE_NORMALIZER;
+
   const { currentUser } = useUserStore();
   const { openDialog } = useDialogContext();
 
@@ -31,7 +46,7 @@ export function Character({
   const [loading, setLoading] = useState(true);
   const [coordinates, setCoordinates] = useState<Coordinates>({ x: 0, y: 0 });
 
-  const { onDragStart, onDragEnd } = useDragHandler({
+  const dragProperties = useDragHandler({
     x: props.x,
     y: props.y,
     playAreaKey,
@@ -45,7 +60,7 @@ export function Character({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.x, props.y]);
 
-  if (loading || !radius) return null;
+  if (loading) return null;
 
   const fillPatternProps: ComponentProps<typeof Circle> =
     portraitDimensions?.width && portraitDimensions.height
@@ -63,17 +78,33 @@ export function Character({
   return (
     <>
       <Circle
+        radius={
+          radius +
+          (BASE_TOP_SHADOW_SIZE + BASE_BOTTOM_SHADOW_SIZE) *
+            heightProportionToDefaultHeight
+        }
+        fill="black"
+        opacity={0.7}
+        x={coordinates.x}
+        y={
+          coordinates.y +
+          BASE_BOTTOM_SHADOW_SIZE * heightProportionToDefaultHeight
+        }
+      />
+      <Circle
         radius={radius}
-        stroke={"white"}
-        strokeWidth={5}
-        draggable={currentUser?.admin}
-        onClick={openCharacterDrawer}
-        onTap={openCharacterDrawer}
-        onDragStart={onDragStart}
-        onDragEnd={onDragEnd}
         {...props}
         {...coordinates}
         {...fillPatternProps}
+      />
+      <Circle
+        radius={radius}
+        draggable={currentUser?.admin}
+        onClick={openCharacterDrawer}
+        onTap={openCharacterDrawer}
+        {...props}
+        {...coordinates}
+        {...dragProperties}
       />
     </>
   );

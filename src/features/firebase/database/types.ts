@@ -8,6 +8,7 @@ export enum DatabaseModelEnum {
 export type CharacterDatabaseType = Coordinates & {
   playAreaKey: string;
   characterId: string;
+  height?: number;
 };
 
 export type DatabaseModel = {
