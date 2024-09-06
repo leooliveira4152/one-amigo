@@ -18,7 +18,7 @@ import { CharacterDrawer } from "./CharacterDrawer";
 import { useDragHandler } from "./useDragHandler";
 
 const CHARACTER_SIZE_NORMALIZER = 0.8; // Otherwise character height discrepancy would result in HUGE character icons for really tall characters
-const CIRCUMFERENCE_NORMALIZER = 0.8; // Otherwise characters icon would be too large,
+export const CIRCUMFERENCE_NORMALIZER = 0.8; // Otherwise characters icon would be too large,
 const BASE_TOP_SHADOW_SIZE = 5;
 const BASE_BOTTOM_SHADOW_SIZE = 10;
 

@@ -69,6 +69,28 @@ describe("useDragHandler", () => {
     });
   });
 
+  describe("onDragMove", () => {
+    it("should call setCoordinates with the expected value", () => {
+      const mockPointerPosition = { x: mockInteger(), y: mockInteger() };
+      const { result } = setup();
+      result.current.onDragMove(createMockEvent(mockPointerPosition));
+      expect(mockSetCoordinates).toHaveBeenCalledWith({
+        x:
+          (mockPointerPosition.x - mockPlayAreaStoreReturn.stagePosition.x) /
+          mockPlayAreaStoreReturn.stageScale,
+        y:
+          (mockPointerPosition.y - mockPlayAreaStoreReturn.stagePosition.y) /
+          mockPlayAreaStoreReturn.stageScale,
+      });
+    });
+
+    it("should NOT call setCoordinates if no pointerPosition was found", () => {
+      const { result } = setup();
+      result.current.onDragMove(createMockEvent());
+      expect(mockSetCoordinates).not.toHaveBeenCalled();
+    });
+  });
+
   describe("onDragEnd", () => {
     it("should call setCoordinates and moveCharacter with the right values", () => {
       const mockPointerPosition = {

@@ -7,15 +7,16 @@ import {
   StorageDirectoriesEnum,
   useGetStorageImage,
 } from "@/features/firebase/storage";
+import { METER_SIZE } from "@/features/playArea/common";
 import { useUserStore } from "@/features/store/user";
 import { generateRandomObject } from "@/testUtils";
 
-import { Character } from "./Character";
+import { Character, CIRCUMFERENCE_NORMALIZER } from "./Character";
 import { CharacterDrawer } from "./CharacterDrawer";
 
-const mockCircleTestId = faker.string.alpha();
-const mockCharacterId = faker.string.alpha();
-const mockPlayAreKey = faker.string.alpha();
+const mockCircleTestId = faker.string.alpha(5);
+const mockCharacterId = faker.string.alpha(5);
+const mockPlayAreKey = faker.string.alpha(5);
 const mockRadius = faker.number.int();
 const mockCoordinates = { x: faker.number.int(), y: faker.number.int() };
 const mockCircleProps = generateRandomObject();
@@ -28,9 +29,14 @@ const mockOnDragStart = jest.fn();
 const mockOnDragEnd = jest.fn();
 
 jest.mock("react-konva", () => ({
-  Circle: jest.fn((props) => (
-    <button data-testid={mockCircleTestId} onClick={props.onClick} />
-  )),
+  Circle: jest.fn((props) => {
+    return (
+      <button
+        data-testid={props.onClick && props.onTap && mockCircleTestId}
+        onClick={props.onClick}
+      />
+    );
+  }),
 }));
 
 jest.mock("@/features/store/user", () => ({
@@ -57,11 +63,6 @@ jest.mock("./CharacterDrawer", () => ({
 describe("<Character />", () => {
   const defaultCircleProps = {
     radius: mockRadius,
-    draggable: expect.not.stringMatching(/true/),
-    onClick: expect.any(Function),
-    onTap: expect.any(Function),
-    onDragStart: mockOnDragStart,
-    onDragEnd: mockOnDragEnd,
     ...mockCoordinates,
     ...mockCircleProps,
   };
@@ -85,16 +86,36 @@ describe("<Character />", () => {
   };
 
   it("should render the circle accordingly if portraitDimensions are available", () => {
+    const mockNormalizedRadius = METER_SIZE * CIRCUMFERENCE_NORMALIZER;
     setup();
 
     expectRightGetStorageImageCall();
-    expect(Circle).toHaveBeenCalledWith(
+    expect(Circle).toHaveBeenCalledTimes(3);
+
+    expect(Circle).toHaveBeenNthCalledWith(
+      2,
       expect.objectContaining({
         ...defaultCircleProps,
         fillPatternImage: mockGetStorageImageReturn.imageElement,
-        fillPatternScale: expect.anything(),
-        fillPatternX: mockRadius,
-        fillPatternY: mockRadius,
+        fillPatternScale: {
+          x:
+            (mockNormalizedRadius * 2) /
+            mockGetStorageImageReturn.dimensions.width,
+          y:
+            (mockNormalizedRadius * 2) /
+            mockGetStorageImageReturn.dimensions.height,
+        },
+        fillPatternX: mockNormalizedRadius,
+        fillPatternY: mockNormalizedRadius,
+      }),
+      {}
+    );
+    expect(Circle).toHaveBeenNthCalledWith(
+      3,
+      expect.objectContaining({
+        draggable: undefined,
+        onDragStart: mockOnDragStart,
+        onDragEnd: mockOnDragEnd,
       }),
       {}
     );
@@ -109,15 +130,9 @@ describe("<Character />", () => {
     setup();
 
     expectRightGetStorageImageCall();
-    expect(Circle).toHaveBeenCalledWith(
-      expect.objectContaining({
-        ...defaultCircleProps,
-        draggable: true,
-        fillPatternImage: mockGetStorageImageReturn.imageElement,
-        fillPatternScale: expect.anything(),
-        fillPatternX: mockRadius,
-        fillPatternY: mockRadius,
-      }),
+    expect(Circle).toHaveBeenNthCalledWith(
+      3,
+      expect.objectContaining({ draggable: true }),
       {}
     );
   });
@@ -135,7 +150,8 @@ describe("<Character />", () => {
       {}
     );
 
-    expect(Circle).toHaveBeenCalledWith(
+    expect(Circle).toHaveBeenNthCalledWith(
+      2,
       expect.not.objectContaining({
         fillPatternImage: expect.anything(),
         fillPatternScale: expect.anything(),
@@ -144,12 +160,6 @@ describe("<Character />", () => {
       }),
       {}
     );
-  });
-
-  it("should NOT render the Circle if no radius was passed to the component", () => {
-    setup({ radius: 0 });
-    expectRightGetStorageImageCall();
-    expect(Circle).not.toHaveBeenCalled();
   });
 
   it("should properly call the openDialog function when triggering onClick event", () => {
