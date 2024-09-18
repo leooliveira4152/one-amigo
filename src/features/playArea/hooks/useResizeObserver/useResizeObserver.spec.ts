@@ -8,9 +8,7 @@ import { useResizeObserver } from "./useResizeObserver";
 import { Dimension } from "../../types";
 
 const mockViewSize = { width: mockInteger(), height: mockInteger() };
-const mockContainerRefCurrent = [
-  { contentRect: mockViewSize },
-] as ResizeObserverEntry[];
+const mockContainerRefCurrent = [{ contentRect: mockViewSize }] as ResizeObserverEntry[];
 const mockContainerRef = {
   current: mockContainerRefCurrent,
 } as unknown as RefObject<HTMLDivElement>;
@@ -33,7 +31,7 @@ global.ResizeObserver = jest.fn(
     ({
       observe: mockObserve,
       disconnect: mockDisconnect,
-    } as unknown as ResizeObserver)
+    }) as unknown as ResizeObserver,
 );
 
 jest.mock("@mui/material", () => ({ debounce: jest.fn((fn) => fn) }));
@@ -49,11 +47,11 @@ describe("useResizeObserver", () => {
       .mocked(global.ResizeObserver)
       .mock.calls[0][0](
         [{ contentRect: stageSize }] as ResizeObserverEntry[],
-        {} as ResizeObserver
+        {} as ResizeObserver,
       );
 
   const updateUsePlayAreaStoreMock = (
-    props: Partial<ReturnType<typeof usePlayAreaStore>>
+    props: Partial<ReturnType<typeof usePlayAreaStore>>,
   ) =>
     jest.mocked(usePlayAreaStore).mockReturnValueOnce({
       ...mockUsePlayAreaStoreReturn,
@@ -72,9 +70,9 @@ describe("useResizeObserver", () => {
     updateUsePlayAreaStoreMock({ mapDimensions: { width: 0, height: 0 } });
     setup();
     mockResizeObserverCall(mockViewSize);
-    expect(
-      mockUsePlayAreaStoreReturn.changeStageDimensions
-    ).toHaveBeenCalledWith(mockViewSize);
+    expect(mockUsePlayAreaStoreReturn.changeStageDimensions).toHaveBeenCalledWith(
+      mockViewSize,
+    );
   });
 
   // Using fixed arbitrary numbers here GREATLY facilitate the tests, as the calculations are complex
@@ -93,12 +91,11 @@ describe("useResizeObserver", () => {
         setup();
         mockResizeObserverCall({ width: 500, height: 150 });
 
-        expect(
-          mockUsePlayAreaStoreReturn.changeStageScale
-        ).toHaveBeenCalledWith(1.5);
-        expect(
-          mockUsePlayAreaStoreReturn.changeStageDimensions
-        ).toHaveBeenCalledWith({ width: 300, height: 150 });
+        expect(mockUsePlayAreaStoreReturn.changeStageScale).toHaveBeenCalledWith(1.5);
+        expect(mockUsePlayAreaStoreReturn.changeStageDimensions).toHaveBeenCalledWith({
+          width: 300,
+          height: 150,
+        });
       });
 
       it("should call changeStageDimensions with its right values and NOT changeStageScale if map wasn't overflowed", () => {
@@ -111,12 +108,11 @@ describe("useResizeObserver", () => {
         setup();
         mockResizeObserverCall({ width: 500, height: 150 });
 
-        expect(
-          mockUsePlayAreaStoreReturn.changeStageScale
-        ).not.toHaveBeenCalled();
-        expect(
-          mockUsePlayAreaStoreReturn.changeStageDimensions
-        ).toHaveBeenCalledWith({ width: 300, height: 150 });
+        expect(mockUsePlayAreaStoreReturn.changeStageScale).not.toHaveBeenCalled();
+        expect(mockUsePlayAreaStoreReturn.changeStageDimensions).toHaveBeenCalledWith({
+          width: 300,
+          height: 150,
+        });
       });
     });
   });
@@ -134,12 +130,11 @@ describe("useResizeObserver", () => {
       setup();
       mockResizeObserverCall({ width: 100, height: 300 });
 
-      expect(mockUsePlayAreaStoreReturn.changeStageScale).toHaveBeenCalledWith(
-        1
-      );
-      expect(
-        mockUsePlayAreaStoreReturn.changeStageDimensions
-      ).toHaveBeenCalledWith({ width: 100, height: 200 });
+      expect(mockUsePlayAreaStoreReturn.changeStageScale).toHaveBeenCalledWith(1);
+      expect(mockUsePlayAreaStoreReturn.changeStageDimensions).toHaveBeenCalledWith({
+        width: 100,
+        height: 200,
+      });
     });
 
     it("should call changeStageDimensions with its right values and NOT changeStageScale if map wasn't overflowed", () => {
@@ -152,12 +147,11 @@ describe("useResizeObserver", () => {
       setup();
       mockResizeObserverCall({ width: 100, height: 300 });
 
-      expect(
-        mockUsePlayAreaStoreReturn.changeStageScale
-      ).not.toHaveBeenCalled();
-      expect(
-        mockUsePlayAreaStoreReturn.changeStageDimensions
-      ).toHaveBeenCalledWith({ width: 100, height: 200 });
+      expect(mockUsePlayAreaStoreReturn.changeStageScale).not.toHaveBeenCalled();
+      expect(mockUsePlayAreaStoreReturn.changeStageDimensions).toHaveBeenCalledWith({
+        width: 100,
+        height: 200,
+      });
     });
   });
 });

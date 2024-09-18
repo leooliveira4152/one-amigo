@@ -35,7 +35,7 @@ describe("useDragHandler", () => {
         ...mockCoordinates,
         playAreaKey: mockPlayAreaKey,
         setCoordinates: mockSetCoordinates,
-      })
+      }),
     );
 
   const createMockEvent = (pointerPosition?: Coordinates) =>
@@ -43,7 +43,7 @@ describe("useDragHandler", () => {
       target: {
         getStage: () => ({ getPointerPosition: () => pointerPosition }),
       },
-    } as unknown as KonvaEventObject<DragEvent>);
+    }) as unknown as KonvaEventObject<DragEvent>;
 
   describe("onDragStart", () => {
     it("should call setDragOffset with the expected value", () => {

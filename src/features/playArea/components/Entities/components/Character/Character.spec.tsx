@@ -3,10 +3,7 @@ import { fireEvent, render } from "@testing-library/react";
 import { ComponentProps } from "react";
 import { Circle } from "react-konva";
 
-import {
-  StorageDirectoriesEnum,
-  useGetStorageImage,
-} from "@/features/firebase/storage";
+import { StorageDirectoriesEnum, useGetStorageImage } from "@/features/firebase/storage";
 import { METER_SIZE } from "@/features/playArea/common";
 import { useUserStore } from "@/features/store/user";
 import { generateRandomObject } from "@/testUtils";
@@ -76,12 +73,12 @@ describe("<Character />", () => {
         {...mockCoordinates}
         {...mockCircleProps}
         {...override}
-      />
+      />,
     );
 
   const expectRightGetStorageImageCall = () => {
     expect(useGetStorageImage).toHaveBeenCalledWith(
-      `${StorageDirectoriesEnum.CHARACTERS}/${mockCharacterId}/default_portrait.jpg`
+      `${StorageDirectoriesEnum.CHARACTERS}/${mockCharacterId}/default_portrait.jpg`,
     );
   };
 
@@ -98,17 +95,13 @@ describe("<Character />", () => {
         ...defaultCircleProps,
         fillPatternImage: mockGetStorageImageReturn.imageElement,
         fillPatternScale: {
-          x:
-            (mockNormalizedRadius * 2) /
-            mockGetStorageImageReturn.dimensions.width,
-          y:
-            (mockNormalizedRadius * 2) /
-            mockGetStorageImageReturn.dimensions.height,
+          x: (mockNormalizedRadius * 2) / mockGetStorageImageReturn.dimensions.width,
+          y: (mockNormalizedRadius * 2) / mockGetStorageImageReturn.dimensions.height,
         },
         fillPatternX: mockNormalizedRadius,
         fillPatternY: mockNormalizedRadius,
       }),
-      {}
+      {},
     );
     expect(Circle).toHaveBeenNthCalledWith(
       3,
@@ -117,7 +110,7 @@ describe("<Character />", () => {
         onDragStart: mockOnDragStart,
         onDragEnd: mockOnDragEnd,
       }),
-      {}
+      {},
     );
   });
 
@@ -133,7 +126,7 @@ describe("<Character />", () => {
     expect(Circle).toHaveBeenNthCalledWith(
       3,
       expect.objectContaining({ draggable: true }),
-      {}
+      {},
     );
   });
 
@@ -145,10 +138,7 @@ describe("<Character />", () => {
     setup();
 
     expectRightGetStorageImageCall();
-    expect(Circle).toHaveBeenCalledWith(
-      expect.objectContaining(defaultCircleProps),
-      {}
-    );
+    expect(Circle).toHaveBeenCalledWith(expect.objectContaining(defaultCircleProps), {});
 
     expect(Circle).toHaveBeenNthCalledWith(
       2,
@@ -158,7 +148,7 @@ describe("<Character />", () => {
         fillPatternX: expect.anything(),
         fillPatternY: expect.anything(),
       }),
-      {}
+      {},
     );
   });
 

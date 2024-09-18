@@ -20,9 +20,7 @@ describe("useGetStorageImage", () => {
   jest.mocked(getDownloadURL).mockResolvedValue(mockImageUrl);
 
   it("should run past every function accordingly, in one cycle", async () => {
-    const { result, rerender } = renderHook(() =>
-      useGetStorageImage(mockImagePath)
-    );
+    const { result, rerender } = renderHook(() => useGetStorageImage(mockImagePath));
 
     expect(useImage).toHaveBeenCalledWith("");
 

@@ -48,8 +48,7 @@ export function LayoutWrapper({ children }: PropsWithChildren) {
       if (user && user.email) {
         const userDoc = await readUser(user.email);
         setCurrentUser((userDoc?.data() ?? user.toJSON()) as User);
-      } else if (!user && pathname !== "/login" && !isSpectator)
-        router.replace("/login");
+      } else if (!user && pathname !== "/login" && !isSpectator) router.replace("/login");
     });
 
     return () => unsubscribe();

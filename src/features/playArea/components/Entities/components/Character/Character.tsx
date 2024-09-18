@@ -3,15 +3,9 @@ import { Circle } from "react-konva";
 
 import { useDialogContext } from "@/features/context/DialogContext";
 import { CharacterDatabaseType } from "@/features/firebase/database";
-import {
-  StorageDirectoriesEnum,
-  useGetStorageImage,
-} from "@/features/firebase/storage";
+import { StorageDirectoriesEnum, useGetStorageImage } from "@/features/firebase/storage";
 import { Coordinates } from "@/features/playArea";
-import {
-  DEFAULT_PERSON_HEIGHT_METERS,
-  METER_SIZE,
-} from "@/features/playArea/common";
+import { DEFAULT_PERSON_HEIGHT_METERS, METER_SIZE } from "@/features/playArea/common";
 import { useUserStore } from "@/features/store/user";
 
 import { CharacterDrawer } from "./CharacterDrawer";
@@ -32,15 +26,14 @@ export function Character({
   const heightProportionToDefaultHeight =
     ((height ?? DEFAULT_PERSON_HEIGHT_METERS) / DEFAULT_PERSON_HEIGHT_METERS) **
     CHARACTER_SIZE_NORMALIZER;
-  const radius =
-    heightProportionToDefaultHeight * METER_SIZE * CIRCUMFERENCE_NORMALIZER;
+  const radius = heightProportionToDefaultHeight * METER_SIZE * CIRCUMFERENCE_NORMALIZER;
 
   const { currentUser } = useUserStore();
   const { openDialog } = useDialogContext();
 
   const { imageElement: portraitElement, dimensions: portraitDimensions } =
     useGetStorageImage(
-      `${StorageDirectoriesEnum.CHARACTERS}/${characterId}/default_portrait.jpg`
+      `${StorageDirectoriesEnum.CHARACTERS}/${characterId}/default_portrait.jpg`,
     );
 
   const [loading, setLoading] = useState(true);
@@ -86,17 +79,9 @@ export function Character({
         fill="black"
         opacity={0.7}
         x={coordinates.x}
-        y={
-          coordinates.y +
-          BASE_BOTTOM_SHADOW_SIZE * heightProportionToDefaultHeight
-        }
+        y={coordinates.y + BASE_BOTTOM_SHADOW_SIZE * heightProportionToDefaultHeight}
       />
-      <Circle
-        radius={radius}
-        {...props}
-        {...coordinates}
-        {...fillPatternProps}
-      />
+      <Circle radius={radius} {...props} {...coordinates} {...fillPatternProps} />
       <Circle
         radius={radius}
         draggable={currentUser?.admin}

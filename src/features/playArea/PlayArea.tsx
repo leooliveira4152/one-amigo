@@ -9,8 +9,7 @@ import { usePlayAreaStore } from "../store/playArea";
 
 export function PlayArea() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { cursor, stageDimensions, stageScale, stagePosition } =
-    usePlayAreaStore();
+  const { cursor, stageDimensions, stageScale, stagePosition } = usePlayAreaStore();
 
   const onWheel = useScrollHandler();
   useResizeObserver(containerRef);
@@ -18,19 +17,22 @@ export function PlayArea() {
   return (
     <div
       ref={containerRef}
-      className="h-full w-full flex justify-center items-center flex-col">
+      className="h-full w-full flex justify-center items-center flex-col"
+    >
       <Stage
         // Using border instead of outline messes with the stage resizing process
         className="box-content outline-2 outline-white outline"
         style={{ cursor }}
-        {...stageDimensions}>
+        {...stageDimensions}
+      >
         <Background />
         <Layer
           scaleX={stageScale}
           scaleY={stageScale}
           // Be aware that, as of 30-08-2024, Brave Shield blocks onWheel for some reason
           onWheel={onWheel}
-          {...stagePosition}>
+          {...stagePosition}
+        >
           <Map />
           <Entities />
         </Layer>

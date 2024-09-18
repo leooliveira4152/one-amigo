@@ -20,8 +20,7 @@ export function useGetStorageImage(imagePath: string) {
 
       const img = new Image();
       img.src = url;
-      img.onload = () =>
-        setImageDimensions({ width: img.width, height: img.height });
+      img.onload = () => setImageDimensions({ width: img.width, height: img.height });
       setImageUrl(url);
       setImageObject(img);
     };

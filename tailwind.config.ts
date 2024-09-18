@@ -7,7 +7,7 @@ const deepPurpleColors = Object.entries(deepPurple).reduce(
     "primary-dark": deepPurple[700],
     "primary-light": deepPurple[300],
     "primary-main": deepPurple[500],
-  }
+  },
 );
 
 const pinkColors = Object.entries(pink).reduce(
@@ -16,7 +16,7 @@ const pinkColors = Object.entries(pink).reduce(
     "secondary-dark": pink[700],
     "secondary-light": pink[300],
     "secondary-main": pink[500],
-  }
+  },
 );
 
 const config: Config = {

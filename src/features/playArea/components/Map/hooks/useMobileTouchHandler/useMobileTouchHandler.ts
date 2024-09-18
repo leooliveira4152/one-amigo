@@ -47,12 +47,8 @@ export function useMobileTouchHandler(draggableRef: RefObject<Konva.Rect>) {
         initialStageScale * (updatedDistance / initialDistance) ** 0.75;
       // toFixed help with jest checks, no production code change
       const updatePosition = {
-        x: Number(
-          (updatedCenter.x - pointTo.x * updatedScale - dx / 5).toFixed(3)
-        ),
-        y: Number(
-          (updatedCenter.y - pointTo.y * updatedScale - dy / 5).toFixed(3)
-        ),
+        x: Number((updatedCenter.x - pointTo.x * updatedScale - dx / 5).toFixed(3)),
+        y: Number((updatedCenter.y - pointTo.y * updatedScale - dy / 5).toFixed(3)),
       };
 
       changeStageScale(updatedScale);

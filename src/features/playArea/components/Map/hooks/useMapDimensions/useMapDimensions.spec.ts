@@ -27,9 +27,7 @@ jest.mock("@/features/store/playArea", () => ({
 
 describe("useMapDimensions", () => {
   const setup = (mapDimensions?: Dimension) =>
-    renderHook(() =>
-      useMapDimensions(mapDimensions ?? { width: 0, height: 0 })
-    );
+    renderHook(() => useMapDimensions(mapDimensions ?? { width: 0, height: 0 }));
 
   it("should not do or call anything if no mapDimension was provided", () => {
     setup();
@@ -53,8 +51,7 @@ describe("useMapDimensions", () => {
       } as unknown as ReturnType<typeof usePlayAreaStore>);
       setup(mockMapDimensions);
 
-      const expectedScale =
-        mockStageDimensions.height / mockMapDimensions.height;
+      const expectedScale = mockStageDimensions.height / mockMapDimensions.height;
       expect(mockChangeStageScale).toHaveBeenCalledWith(expectedScale, {
         forceScale: true,
       });

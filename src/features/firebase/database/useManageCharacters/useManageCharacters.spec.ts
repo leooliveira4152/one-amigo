@@ -70,7 +70,7 @@ describe("moveCharacter", () => {
     moveCharacter(characterId, mockCoordinates);
     expect(updateDatabase).toHaveBeenCalledWith(
       `${DatabaseModelEnum.CHARACTERS}/${characterId}`,
-      mockCoordinates
+      mockCoordinates,
     );
   });
 });

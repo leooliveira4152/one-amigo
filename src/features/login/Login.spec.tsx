@@ -16,7 +16,7 @@ const mockSignInWithGooglePopup = jest.fn(
     new Promise((resolve, reject) => {
       signInResolve = resolve;
       signInReject = reject;
-    })
+    }),
 );
 
 jest.mock("next/navigation", () => ({
@@ -50,7 +50,7 @@ describe("<Login />", () => {
   it("should render the operation buttons inside their container", () => {
     const { getByTestId } = setup();
     const { getByTestId: getByTestIdWithinContainer } = within(
-      getByTestId(LoginTestIds.BUTTON_CONTAINER)
+      getByTestId(LoginTestIds.BUTTON_CONTAINER),
     );
     getByTestIdWithinContainer(LoginTestIds.LOGIN_BUTTON);
     getByTestIdWithinContainer(LoginTestIds.SPECTATOR_BUTTON);

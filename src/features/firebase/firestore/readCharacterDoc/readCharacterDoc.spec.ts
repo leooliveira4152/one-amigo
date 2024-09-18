@@ -12,9 +12,7 @@ const mockData = jest.fn(() => mockDataReturn);
 jest.mock("../client", () => ({ firestoreDatabase: jest.fn() }));
 jest.mock("firebase/firestore", () => ({
   doc: jest.fn(() => mockDocReturn),
-  getDoc: jest.fn(() =>
-    Promise.resolve({ exists: mockExists, data: mockData })
-  ),
+  getDoc: jest.fn(() => Promise.resolve({ exists: mockExists, data: mockData })),
 }));
 
 describe("readCharacterDoc", () => {

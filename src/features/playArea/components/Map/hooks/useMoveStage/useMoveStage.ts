@@ -5,8 +5,7 @@ import { RefObject } from "react";
 import { usePlayAreaStore } from "@/features/store/playArea";
 
 export function useMoveStage(draggableRef: RefObject<Konva.Rect>) {
-  const { mapDimensions, changeStagePosition, changePointer } =
-    usePlayAreaStore();
+  const { mapDimensions, changeStagePosition, changePointer } = usePlayAreaStore();
 
   return {
     onDragStart: () => changePointer("grabbing"),

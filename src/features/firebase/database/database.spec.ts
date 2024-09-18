@@ -2,11 +2,7 @@ import { faker } from "@faker-js/faker";
 import { renderHook } from "@testing-library/react";
 import { ref, set, update, onValue, DataSnapshot } from "firebase/database";
 
-import {
-  updateDatabase,
-  useRealtimeDatabase,
-  writeOnDatabase,
-} from "./database";
+import { updateDatabase, useRealtimeDatabase, writeOnDatabase } from "./database";
 
 // Mock Firebase functions
 jest.mock("firebase/database", () => ({

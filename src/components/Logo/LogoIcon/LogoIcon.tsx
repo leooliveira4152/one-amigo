@@ -26,7 +26,8 @@ function LogoIcon() {
           y1="367.78"
           x2="404"
           y2="321"
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset="0" stopColor="#d363d3" />
           <stop offset=".04" stopColor="#c75cce" />
           <stop offset=".16" stopColor="#a94bc4" />
@@ -41,7 +42,8 @@ function LogoIcon() {
           y1="626.46"
           x2="912.94"
           y2="232.46"
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset=".27" stopColor="#d363d3" />
           <stop offset=".3" stopColor="#be56cb" />
           <stop offset=".34" stopColor="#a84ac4" />
@@ -56,7 +58,8 @@ function LogoIcon() {
           y1="704.08"
           x2="429.28"
           y2="737.02"
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset=".11" stopColor="#8335b7" />
           <stop offset=".3" stopColor="#8e3bbb" />
           <stop offset=".66" stopColor="#ae4dc6" />
@@ -68,7 +71,8 @@ function LogoIcon() {
           y1="113.59"
           x2="671.43"
           y2="217.63"
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset=".34" stopColor="#6822b0" />
           <stop offset=".52" stopColor="#8c38bc" />
           <stop offset=".73" stopColor="#b24fc8" />
@@ -81,7 +85,8 @@ function LogoIcon() {
           y1="198.64"
           x2="737.41"
           y2="240.24"
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset=".22" stopColor="#8335b7" />
           <stop offset=".23" stopColor="#8335b7" />
           <stop offset=".57" stopColor="#ae4dc6" />
@@ -94,7 +99,8 @@ function LogoIcon() {
           y1="584.02"
           x2="794.47"
           y2="633.69"
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset=".34" stopColor="#8335b7" />
           <stop offset=".41" stopColor="#9e44c0" />
           <stop offset=".49" stopColor="#b552c8" />
@@ -108,7 +114,8 @@ function LogoIcon() {
           y1="460.35"
           x2="101.97"
           y2="442.36"
-          gradientUnits="userSpaceOnUse">
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset="0" stopColor="#5810b0" />
           <stop offset=".13" stopColor="#7624b8" />
           <stop offset=".4" stopColor="#c257ce" />
@@ -194,7 +201,8 @@ export function LogoIconWrapper({
       xmlns="http://www.w3.org/2000/svg"
       viewBox="200 110 720 650"
       data-testid={LogoIconTestIds.SVG}
-      {...props}>
+      {...props}
+    >
       <LogoIcon />
     </svg>
   );

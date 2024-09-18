@@ -85,11 +85,7 @@ export const usePlayAreaStore = () => {
       dispatch(playAreaSlice.actions.changeStageScale(scale));
     },
     changeStagePosition: (position: Coordinates, updatedScale?: number) => {
-      const {
-        mapDimensions,
-        stageDimensions,
-        stageScale: _stageScale,
-      } = values.playArea;
+      const { mapDimensions, stageDimensions, stageScale: _stageScale } = values.playArea;
       const stageScale = updatedScale ?? _stageScale;
 
       // prevents stage view from going OoB by the right

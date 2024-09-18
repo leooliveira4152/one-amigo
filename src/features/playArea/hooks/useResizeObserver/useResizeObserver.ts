@@ -49,17 +49,11 @@ export function useResizeObserver(containerRef: RefObject<HTMLDivElement>) {
               width: stageWidth,
             });
           }
-        }, 200)
+        }, 200),
       );
 
       observer.observe(containerRef.current);
       return () => observer.disconnect();
     }
-  }, [
-    changeStageDimensions,
-    changeStageScale,
-    containerRef,
-    mapDimensions,
-    stageScale,
-  ]);
+  }, [changeStageDimensions, changeStageScale, containerRef, mapDimensions, stageScale]);
 }

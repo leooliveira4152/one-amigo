@@ -42,23 +42,19 @@ jest.mock("../store", () => ({
 describe("playArea", () => {
   describe("playAreaSlice", () => {
     it("should handle changePointer", () => {
-      const action = playAreaSlice.actions.changePointer(
-        "pointer" as Property.Cursor
-      );
+      const action = playAreaSlice.actions.changePointer("pointer" as Property.Cursor);
       const state = playAreaSlice.reducer(mockInitialState, action);
       expect(state.playArea.cursor).toBe("pointer");
     });
 
     it("should handle changeMapDimensions", () => {
-      const action =
-        playAreaSlice.actions.changeMapDimensions(mockMapDimensions);
+      const action = playAreaSlice.actions.changeMapDimensions(mockMapDimensions);
       const state = playAreaSlice.reducer(mockInitialState, action);
       expect(state.playArea.mapDimensions).toEqual(mockMapDimensions);
     });
 
     it("should handle changeStageDimensions", () => {
-      const action =
-        playAreaSlice.actions.changeStageDimensions(mockStageDimensions);
+      const action = playAreaSlice.actions.changeStageDimensions(mockStageDimensions);
       const state = playAreaSlice.reducer(mockInitialState, action);
       expect(state.playArea.stageDimensions).toEqual(mockStageDimensions);
     });
@@ -70,8 +66,7 @@ describe("playArea", () => {
     });
 
     it("should handle changeStagePosition", () => {
-      const action =
-        playAreaSlice.actions.changeStagePosition(mockStagePosition);
+      const action = playAreaSlice.actions.changeStagePosition(mockStagePosition);
       const state = playAreaSlice.reducer(mockInitialState, action);
       expect(state.playArea.stagePosition).toEqual(mockStagePosition);
     });
@@ -85,11 +80,9 @@ describe("playArea", () => {
       expect(result.current.cursor).toBe("default");
       expect(result.current.mapDimensions).toEqual(mockMapDimensions);
       expect(result.current.stageDimensions).toEqual(mockStageDimensions);
-      expect(result.current.stageScale).toBe(
-        mockInitialState.playArea.stageScale
-      );
+      expect(result.current.stageScale).toBe(mockInitialState.playArea.stageScale);
       expect(result.current.stagePosition).toEqual(
-        mockInitialState.playArea.stagePosition
+        mockInitialState.playArea.stagePosition,
       );
     });
 
@@ -98,7 +91,7 @@ describe("playArea", () => {
       const { result } = setup();
       result.current.changePointer(cursorType as Property.Cursor);
       expect(mockDispatch).toHaveBeenCalledWith(
-        playAreaSlice.actions.changePointer(cursorType)
+        playAreaSlice.actions.changePointer(cursorType),
       );
     });
 
@@ -111,7 +104,7 @@ describe("playArea", () => {
       const { result } = setup();
       result.current.changeMapDimensions(mockUpdatedMapDimensions);
       expect(mockDispatch).toHaveBeenCalledWith(
-        playAreaSlice.actions.changeMapDimensions(mockUpdatedMapDimensions)
+        playAreaSlice.actions.changeMapDimensions(mockUpdatedMapDimensions),
       );
     });
 
@@ -124,7 +117,7 @@ describe("playArea", () => {
       const { result } = setup();
       result.current.changeStageDimensions(mockUpdatedMapDimensions);
       expect(mockDispatch).toHaveBeenCalledWith(
-        playAreaSlice.actions.changeStageDimensions(mockUpdatedMapDimensions)
+        playAreaSlice.actions.changeStageDimensions(mockUpdatedMapDimensions),
       );
     });
 
@@ -147,7 +140,7 @@ describe("playArea", () => {
         const { result } = setup();
         result.current.changeStageScale(mockUpdatedScale);
         expect(mockDispatch).toHaveBeenCalledWith(
-          playAreaSlice.actions.changeStageScale(mockUpdatedScale)
+          playAreaSlice.actions.changeStageScale(mockUpdatedScale),
         );
       });
 
@@ -187,7 +180,7 @@ describe("playArea", () => {
               scale = stageDimensions.height / mapDimensions.height;
             else scale = stageDimensions.width / mapDimensions.width;
             expect(mockDispatch).toHaveBeenCalledWith(
-              playAreaSlice.actions.changeStageScale(scale)
+              playAreaSlice.actions.changeStageScale(scale),
             );
           });
 
@@ -198,7 +191,7 @@ describe("playArea", () => {
               forceScale: true,
             });
             expect(mockDispatch).toHaveBeenCalledWith(
-              playAreaSlice.actions.changeStageScale(mockUpdatedScale)
+              playAreaSlice.actions.changeStageScale(mockUpdatedScale),
             );
           });
         });
@@ -235,7 +228,7 @@ describe("playArea", () => {
               scale = stageDimensions.height / mapDimensions.height;
             else scale = stageDimensions.width / mapDimensions.width;
             expect(mockDispatch).toHaveBeenCalledWith(
-              playAreaSlice.actions.changeStageScale(scale)
+              playAreaSlice.actions.changeStageScale(scale),
             );
           });
           it("should change scale if forceScale is true", () => {
@@ -245,7 +238,7 @@ describe("playArea", () => {
               forceScale: true,
             });
             expect(mockDispatch).toHaveBeenCalledWith(
-              playAreaSlice.actions.changeStageScale(mockUpdatedScale)
+              playAreaSlice.actions.changeStageScale(mockUpdatedScale),
             );
           });
         });
@@ -267,7 +260,7 @@ describe("playArea", () => {
         const mockUpdatedPosition = limitPosition;
         result.current.changeStagePosition(mockUpdatedPosition);
         expect(mockDispatch).toHaveBeenCalledWith(
-          playAreaSlice.actions.changeStagePosition(mockUpdatedPosition)
+          playAreaSlice.actions.changeStagePosition(mockUpdatedPosition),
         );
       });
 
@@ -283,12 +276,9 @@ describe("playArea", () => {
         };
 
         const { result } = setup();
-        result.current.changeStagePosition(
-          mockUpdatedPosition,
-          mockUpdatedStagePosition
-        );
+        result.current.changeStagePosition(mockUpdatedPosition, mockUpdatedStagePosition);
         expect(mockDispatch).toHaveBeenCalledWith(
-          playAreaSlice.actions.changeStagePosition(mockUpdatedPosition)
+          playAreaSlice.actions.changeStagePosition(mockUpdatedPosition),
         );
       });
 
@@ -305,7 +295,7 @@ describe("playArea", () => {
               playAreaSlice.actions.changeStagePosition({
                 x: 0,
                 y: mockUpdatedPosition.y,
-              })
+              }),
             );
           });
 
@@ -321,7 +311,7 @@ describe("playArea", () => {
               playAreaSlice.actions.changeStagePosition({
                 x: limitPosition.x,
                 y: mockUpdatedPosition.y,
-              })
+              }),
             );
           });
         });
@@ -338,7 +328,7 @@ describe("playArea", () => {
               playAreaSlice.actions.changeStagePosition({
                 x: mockUpdatedPosition.x,
                 y: 0,
-              })
+              }),
             );
           });
 
@@ -354,7 +344,7 @@ describe("playArea", () => {
               playAreaSlice.actions.changeStagePosition({
                 x: mockUpdatedPosition.x,
                 y: limitPosition.y,
-              })
+              }),
             );
           });
         });

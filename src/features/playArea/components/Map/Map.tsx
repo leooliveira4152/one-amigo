@@ -2,16 +2,14 @@ import Konva from "konva";
 import { useRef } from "react";
 import { Image, Rect } from "react-konva";
 
-import {
-  StorageDirectoriesEnum,
-  useGetStorageImage,
-} from "@/features/firebase/storage";
+import { StorageDirectoriesEnum, useGetStorageImage } from "@/features/firebase/storage";
 
 import { useMapDimensions, useMobileTouchHandler, useMoveStage } from "./hooks";
 
 export function Map() {
-  const { imageElement: mapImage, dimensions: mapDimensions } =
-    useGetStorageImage(`${StorageDirectoriesEnum.MAPS}/00_execucao_pele.jpg`);
+  const { imageElement: mapImage, dimensions: mapDimensions } = useGetStorageImage(
+    `${StorageDirectoriesEnum.MAPS}/00_execucao_pele.jpg`,
+  );
 
   const draggableRef = useRef<Konva.Rect>(null);
 

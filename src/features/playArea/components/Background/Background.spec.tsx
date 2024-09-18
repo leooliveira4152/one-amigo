@@ -36,7 +36,7 @@ describe("<Background />", () => {
         fillPatternRepeat: "repeat",
         fillPatternScale: { x: backgroundImageScale, y: backgroundImageScale },
       }),
-      {}
+      {},
     );
   });
 });

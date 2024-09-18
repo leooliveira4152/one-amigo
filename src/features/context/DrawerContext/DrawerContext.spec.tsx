@@ -19,7 +19,8 @@ describe("DrawerProvider", () => {
               content: <div>{testContentText}</div>,
               anchor: "left",
             })
-          }>
+          }
+        >
           {openDrawerText}
         </button>
         <button onClick={closeDrawer}>Close Drawer</button>
@@ -31,7 +32,7 @@ describe("DrawerProvider", () => {
     render(
       <DrawerProvider>
         <TestComponent />
-      </DrawerProvider>
+      </DrawerProvider>,
     );
 
   it("should open and close the drawer correctly", async () => {

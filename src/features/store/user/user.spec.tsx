@@ -8,7 +8,6 @@ import { Provider } from "react-redux";
 
 import { useUserStore, userSlice } from "./user";
 
-
 const mockUser = {
   uid: faker.string.alphanumeric(),
   displayName: faker.person.fullName(),
@@ -84,14 +83,12 @@ describe("userSlice", () => {
       render(
         <Provider store={store}>
           <TestComponent />
-        </Provider>
+        </Provider>,
       );
 
     it("should return correct initial state", () => {
       const { result } = renderHook(useUserStore, {
-        wrapper: ({ children }) => (
-          <Provider store={store}>{children}</Provider>
-        ),
+        wrapper: ({ children }) => <Provider store={store}>{children}</Provider>,
       });
 
       const { currentUser, spectator } = result.current;
@@ -117,7 +114,7 @@ describe("userSlice", () => {
 
       userEvent.click(getByTestId(UserStoreIds.CHANGE_SPECTATOR_STATE));
       await waitFor(() =>
-        expect(queryByTestId(UserStoreIds.SPECTATOR_STATE)).toBeFalsy()
+        expect(queryByTestId(UserStoreIds.SPECTATOR_STATE)).toBeFalsy(),
       );
     });
   });

@@ -65,7 +65,7 @@ describe("<PlayArea />", () => {
         style: { cursor: mockUsePlayAreaStoreReturn.cursor },
         ...mockStageDimensions,
       }),
-      {}
+      {},
     );
     expect(Layer).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -74,7 +74,7 @@ describe("<PlayArea />", () => {
         onWheel: mockOnWheel,
         ...mockStagePosition,
       }),
-      {}
+      {},
     );
   });
 });

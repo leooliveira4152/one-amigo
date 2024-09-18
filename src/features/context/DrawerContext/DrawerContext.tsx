@@ -1,11 +1,5 @@
 import { Drawer, DrawerProps } from "@mui/material";
-import {
-  createContext,
-  PropsWithChildren,
-  ReactNode,
-  useContext,
-  useState,
-} from "react";
+import { createContext, PropsWithChildren, ReactNode, useContext, useState } from "react";
 
 type OpenDrawerProps = Omit<Partial<DrawerProps>, "content"> & {
   content: ReactNode;

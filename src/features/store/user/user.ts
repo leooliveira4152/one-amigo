@@ -24,10 +24,7 @@ export const userSlice = createSlice({
     },
     setIsSpectator: (state, action: PayloadAction<boolean>) => {
       state.spectator.isSpectator = action.payload;
-      localStorage.setItem(
-        LOCAL_STORAGE_SPECTATOR_KEY,
-        action.payload ? "true" : ""
-      );
+      localStorage.setItem(LOCAL_STORAGE_SPECTATOR_KEY, action.payload ? "true" : "");
     },
   },
 });

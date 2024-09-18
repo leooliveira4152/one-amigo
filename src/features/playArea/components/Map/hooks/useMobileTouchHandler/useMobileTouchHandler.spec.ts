@@ -31,60 +31,55 @@ jest.mock("@/features/store/playArea", () => ({
 
 describe("useMobileTouchHandler", () => {
   type TouchEventCoordinates = { clientX: number; clientY: number };
-  const pinchEvent = (
-    pinchCoordinates: [TouchEventCoordinates, TouchEventCoordinates]
-  ) =>
+  const pinchEvent = (pinchCoordinates: [TouchEventCoordinates, TouchEventCoordinates]) =>
     ({
       evt: { touches: pinchCoordinates, preventDefault: jest.fn() },
-    } as unknown as KonvaEventObject<TouchEvent>);
+    }) as unknown as KonvaEventObject<TouchEvent>;
 
   const getPointerCoordinates = (touchCoordinates: TouchEventCoordinates) => ({
     x: touchCoordinates.clientX,
     y: touchCoordinates.clientY,
   });
 
-  const firstPinchCoordinates: [TouchEventCoordinates, TouchEventCoordinates] =
-    [
-      {
-        clientX: faker.number.int({ max: 10 }),
-        clientY: faker.number.int({ max: 10 }),
-      },
-      {
-        clientX: faker.number.int({ max: 10 }),
-        clientY: faker.number.int({ max: 10 }),
-      },
-    ];
-  const secondPinchCoordinates: [TouchEventCoordinates, TouchEventCoordinates] =
-    [
-      {
-        clientX: faker.number.int({ max: 10 }),
-        clientY: faker.number.int({ max: 10 }),
-      },
-      {
-        clientX: faker.number.int({ max: 10 }),
-        clientY: faker.number.int({ max: 10 }),
-      },
-    ];
+  const firstPinchCoordinates: [TouchEventCoordinates, TouchEventCoordinates] = [
+    {
+      clientX: faker.number.int({ max: 10 }),
+      clientY: faker.number.int({ max: 10 }),
+    },
+    {
+      clientX: faker.number.int({ max: 10 }),
+      clientY: faker.number.int({ max: 10 }),
+    },
+  ];
+  const secondPinchCoordinates: [TouchEventCoordinates, TouchEventCoordinates] = [
+    {
+      clientX: faker.number.int({ max: 10 }),
+      clientY: faker.number.int({ max: 10 }),
+    },
+    {
+      clientX: faker.number.int({ max: 10 }),
+      clientY: faker.number.int({ max: 10 }),
+    },
+  ];
 
   const initialCenter = getCenter(
     getPointerCoordinates(firstPinchCoordinates[0]),
-    getPointerCoordinates(firstPinchCoordinates[1])
+    getPointerCoordinates(firstPinchCoordinates[1]),
   );
   const initialDistance = getDistance(
     getPointerCoordinates(firstPinchCoordinates[0]),
-    getPointerCoordinates(firstPinchCoordinates[1])
+    getPointerCoordinates(firstPinchCoordinates[1]),
   );
 
   const updatedCenter = getCenter(
     getPointerCoordinates(secondPinchCoordinates[0]),
-    getPointerCoordinates(secondPinchCoordinates[1])
+    getPointerCoordinates(secondPinchCoordinates[1]),
   );
   const updatedDistance = getDistance(
     getPointerCoordinates(secondPinchCoordinates[0]),
-    getPointerCoordinates(secondPinchCoordinates[1])
+    getPointerCoordinates(secondPinchCoordinates[1]),
   );
-  const updatedScale =
-    mockStageScale * (updatedDistance / initialDistance) ** 0.75;
+  const updatedScale = mockStageScale * (updatedDistance / initialDistance) ** 0.75;
 
   const setup = (draggableRef?: RefObject<Konva.Rect>) =>
     renderHook(() => useMobileTouchHandler(draggableRef ?? mockDraggableRef));
@@ -105,27 +100,23 @@ describe("useMobileTouchHandler", () => {
       x: Number(
         (
           updatedCenter.x -
-          (updatedScale * (updatedCenter.x - mockStagePosition.x)) /
-            mockStageScale -
+          (updatedScale * (updatedCenter.x - mockStagePosition.x)) / mockStageScale -
           (updatedCenter.x - initialCenter.x) / 5
-        ).toFixed(3)
+        ).toFixed(3),
       ),
       y: Number(
         (
           updatedCenter.y -
-          (updatedScale * (updatedCenter.y - mockStagePosition.y)) /
-            mockStageScale -
+          (updatedScale * (updatedCenter.y - mockStagePosition.y)) / mockStageScale -
           (updatedCenter.y - initialCenter.y) / 5
-        ).toFixed(3)
+        ).toFixed(3),
       ),
     });
   });
 
   it("should have a callable onTouchEnd prop that resets the temporary position props", () => {
     const mockStateChanger = jest.fn();
-    jest
-      .spyOn(React, "useState")
-      .mockImplementationOnce(() => ["", mockStateChanger]);
+    jest.spyOn(React, "useState").mockImplementationOnce(() => ["", mockStateChanger]);
 
     const { result } = setup();
     expect(result.current.onTouchEnd).toBeInstanceOf(Function);
@@ -145,28 +136,26 @@ describe("useMobileTouchHandler", () => {
     it("should NOT trigger the required function if no touch2 was passed (user pressed the screen with one finger)", () => {
       const { result, rerender } = setup();
       result.current.onTouchMove(
-        pinchEvent([firstPinchCoordinates[0]] as unknown as Normalizer)
+        pinchEvent([firstPinchCoordinates[0]] as unknown as Normalizer),
       );
       rerender();
       result.current.onTouchMove(
-        pinchEvent([secondPinchCoordinates[0]] as unknown as Normalizer)
+        pinchEvent([secondPinchCoordinates[0]] as unknown as Normalizer),
       );
 
       requiredFunctions.forEach((requiredFunction) =>
-        expect(requiredFunction).not.toHaveBeenCalled()
+        expect(requiredFunction).not.toHaveBeenCalled(),
       );
     });
 
     it("should NOT trigger the required function if no stage was passed (some issue with draggableRef)", () => {
-      const { result, rerender } = setup(
-        {} as unknown as RefObject<Konva.Rect>
-      );
+      const { result, rerender } = setup({} as unknown as RefObject<Konva.Rect>);
       result.current.onTouchMove(pinchEvent(firstPinchCoordinates));
       rerender();
       result.current.onTouchMove(pinchEvent(secondPinchCoordinates));
 
       requiredFunctions.forEach((requiredFunction) =>
-        expect(requiredFunction).not.toHaveBeenCalled()
+        expect(requiredFunction).not.toHaveBeenCalled(),
       );
     });
   });

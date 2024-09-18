@@ -33,11 +33,7 @@ function LogoText() {
         strokeWidth={0}
         d="M564.21,850.88c0-26.31,15.33-38.04,35.18-38.04,11.88,0,21.35,4.66,27.21,13.53,5.86-8.87,15.33-13.53,27.21-13.53,19.84,0,35.18,11.73,35.18,38.04v62.24h-24.36v-62.24c0-11.43-5.56-15.49-12.93-15.49s-12.93,4.06-12.93,15.49v62.24h-24.36v-62.24c0-11.43-5.71-15.49-12.93-15.49s-12.93,4.06-12.93,15.49v62.24h-24.36v-62.24Z"
       />
-      <path
-        fill="#fff"
-        strokeWidth={0}
-        d="M706.88,814.8h24.36v98.33h-24.36v-98.33Z"
-      />
+      <path fill="#fff" strokeWidth={0} d="M706.88,814.8h24.36v98.33h-24.36v-98.33Z" />
       <path
         fill="#fff"
         strokeWidth={0}
@@ -62,7 +58,8 @@ export function LogoTextWrapper({
       data-testid={LogoTextTestIds.SVG}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="100 795 880 135"
-      {...props}>
+      {...props}
+    >
       <LogoText />
     </svg>
   );

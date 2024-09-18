@@ -4,10 +4,7 @@ import Konva from "konva";
 import { RefObject } from "react";
 import { Image, Rect as Rect } from "react-konva";
 
-import {
-  StorageDirectoriesEnum,
-  useGetStorageImage,
-} from "@/features/firebase/storage";
+import { StorageDirectoriesEnum, useGetStorageImage } from "@/features/firebase/storage";
 import { generateRandomObject } from "@/testUtils";
 
 import { Map } from "./Map";
@@ -51,7 +48,7 @@ describe("<Map />", () => {
 
     expect(useGetStorageImage).toHaveBeenCalledWith(
       // TODO - change it to do it dynamically when doing proper database connection
-      `${StorageDirectoriesEnum.MAPS}/00_execucao_pele.jpg`
+      `${StorageDirectoriesEnum.MAPS}/00_execucao_pele.jpg`,
     );
     expect(useMapDimensions).toHaveBeenCalledWith(mockMapDimensions);
     expect(useMoveStage).toHaveBeenCalledWith(mockUseRefResponse);
@@ -74,7 +71,7 @@ describe("<Map />", () => {
       setup();
       expect(Image).toHaveBeenCalledWith(
         expect.objectContaining({ image: mockImageElement }),
-        {}
+        {},
       );
       expect(Rect).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -83,7 +80,7 @@ describe("<Map />", () => {
           ...mockUseMoveStageResponse,
           ...mockUseMobileTouchHandlerResponse,
         }),
-        {}
+        {},
       );
     });
   });

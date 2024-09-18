@@ -10,7 +10,5 @@ export function Entities() {
 
   if (!mapDimensions.height || !mapDimensions.width) return null;
 
-  return characters.map((data) => (
-    <Character key={data.playAreaKey} {...data} />
-  ));
+  return characters.map((data) => <Character key={data.playAreaKey} {...data} />);
 }

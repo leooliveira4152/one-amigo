@@ -29,7 +29,7 @@ describe("useScrollHandler", () => {
         })),
       },
       evt: { deltaY },
-    } as unknown as KonvaEventObject<WheelEvent>);
+    }) as unknown as KonvaEventObject<WheelEvent>;
 
   const setup = () => renderHook(useScrollHandler);
 
@@ -40,9 +40,7 @@ describe("useScrollHandler", () => {
     } as unknown as KonvaEventObject<WheelEvent>);
 
     expect(mockUsePlayAreaStoreReturn.changeStageScale).not.toHaveBeenCalled();
-    expect(
-      mockUsePlayAreaStoreReturn.changeStagePosition
-    ).not.toHaveBeenCalled();
+    expect(mockUsePlayAreaStoreReturn.changeStagePosition).not.toHaveBeenCalled();
   });
 
   // Please note that, if deltaY is positive, it isn't possible for the updatedScale to be 1 or greater
@@ -59,22 +57,20 @@ describe("useScrollHandler", () => {
     const expectedUpdatedScale = mockCurrentStageScale / SCALE_BY;
 
     expect(mockUsePlayAreaStoreReturn.changeStageScale).toHaveBeenCalledWith(
-      expectedUpdatedScale
+      expectedUpdatedScale,
     );
     expect(mockUsePlayAreaStoreReturn.changeStagePosition).toHaveBeenCalledWith(
       {
         x:
           mockPointerPosition.x -
-          ((mockPointerPosition.x - mockStagePosition.x) /
-            mockCurrentStageScale) *
+          ((mockPointerPosition.x - mockStagePosition.x) / mockCurrentStageScale) *
             expectedUpdatedScale,
         y:
           mockPointerPosition.y -
-          ((mockPointerPosition.y - mockStagePosition.y) /
-            mockCurrentStageScale) *
+          ((mockPointerPosition.y - mockStagePosition.y) / mockCurrentStageScale) *
             expectedUpdatedScale,
       },
-      expectedUpdatedScale
+      expectedUpdatedScale,
     );
   });
 
@@ -92,24 +88,20 @@ describe("useScrollHandler", () => {
       const expectedUpdatedScale = mockCurrentStageScale * SCALE_BY;
 
       expect(mockUsePlayAreaStoreReturn.changeStageScale).toHaveBeenCalledWith(
-        expectedUpdatedScale
+        expectedUpdatedScale,
       );
-      expect(
-        mockUsePlayAreaStoreReturn.changeStagePosition
-      ).toHaveBeenCalledWith(
+      expect(mockUsePlayAreaStoreReturn.changeStagePosition).toHaveBeenCalledWith(
         {
           x:
             mockPointerPosition.x -
-            ((mockPointerPosition.x - mockStagePosition.x) /
-              mockCurrentStageScale) *
+            ((mockPointerPosition.x - mockStagePosition.x) / mockCurrentStageScale) *
               expectedUpdatedScale,
           y:
             mockPointerPosition.y -
-            ((mockPointerPosition.y - mockStagePosition.y) /
-              mockCurrentStageScale) *
+            ((mockPointerPosition.y - mockStagePosition.y) / mockCurrentStageScale) *
               expectedUpdatedScale,
         },
-        expectedUpdatedScale
+        expectedUpdatedScale,
       );
     });
 
@@ -123,23 +115,17 @@ describe("useScrollHandler", () => {
       const { result } = setup();
       result.current(mockWheelEvent(mockDeltaY));
 
-      expect(mockUsePlayAreaStoreReturn.changeStageScale).toHaveBeenCalledWith(
-        1
-      );
-      expect(
-        mockUsePlayAreaStoreReturn.changeStagePosition
-      ).toHaveBeenCalledWith(
+      expect(mockUsePlayAreaStoreReturn.changeStageScale).toHaveBeenCalledWith(1);
+      expect(mockUsePlayAreaStoreReturn.changeStagePosition).toHaveBeenCalledWith(
         {
           x:
             mockPointerPosition.x -
-            (mockPointerPosition.x - mockStagePosition.x) /
-              mockCurrentStageScale,
+            (mockPointerPosition.x - mockStagePosition.x) / mockCurrentStageScale,
           y:
             mockPointerPosition.y -
-            (mockPointerPosition.y - mockStagePosition.y) /
-              mockCurrentStageScale,
+            (mockPointerPosition.y - mockStagePosition.y) / mockCurrentStageScale,
         },
-        1
+        1,
       );
     });
   });

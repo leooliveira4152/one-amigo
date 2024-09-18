@@ -26,14 +26,13 @@ const mockUser = {
 
 describe("createUser", () => {
   const mockFirestore = firestoreDatabase;
-  const setup = (override?: Partial<User>) =>
-    createUser({ ...mockUser, ...override });
+  const setup = (override?: Partial<User>) => createUser({ ...mockUser, ...override });
 
   beforeEach(() => {
     jest
       .mocked(getDoc)
       .mockImplementation(
-        () => ({ exists: () => false } as unknown as ReturnType<typeof getDoc>)
+        () => ({ exists: () => false }) as unknown as ReturnType<typeof getDoc>,
       );
   });
 
@@ -42,7 +41,7 @@ describe("createUser", () => {
     expect(doc).toHaveBeenCalledWith(
       mockFirestore,
       CollectionsEnum.USERS,
-      mockUser.email
+      mockUser.email,
     );
   });
 
@@ -56,7 +55,7 @@ describe("createUser", () => {
     jest
       .mocked(getDoc)
       .mockImplementation(
-        () => ({ exists: () => true } as unknown as ReturnType<typeof getDoc>)
+        () => ({ exists: () => true }) as unknown as ReturnType<typeof getDoc>,
       );
 
     const result = await setup();
@@ -102,7 +101,7 @@ describe("readUser", () => {
       expect(doc).toHaveBeenCalledWith(
         firestoreDatabase,
         CollectionsEnum.USERS,
-        mockEmail
+        mockEmail,
       );
       expect(getDoc).toHaveBeenCalledWith(mockUserRef);
     };

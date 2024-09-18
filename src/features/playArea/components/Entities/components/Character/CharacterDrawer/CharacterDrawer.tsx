@@ -2,14 +2,8 @@
 import { Box, Skeleton } from "@mui/material";
 import { useEffect, useState } from "react";
 
-import {
-  FirestoreCharacter,
-  readCharacterDoc,
-} from "@/features/firebase/firestore";
-import {
-  StorageDirectoriesEnum,
-  useGetStorageImage,
-} from "@/features/firebase/storage";
+import { FirestoreCharacter, readCharacterDoc } from "@/features/firebase/firestore";
+import { StorageDirectoriesEnum, useGetStorageImage } from "@/features/firebase/storage";
 
 export enum CharacterDrawerTestIds {
   ROOT = "character-drawer-root",
@@ -26,7 +20,7 @@ export function CharacterDrawer({ characterId }: CharacterDrawerProps) {
   const [characterData, setCharacterData] = useState<FirestoreCharacter>();
 
   const { imageUrl, dimensions } = useGetStorageImage(
-    `${StorageDirectoriesEnum.CHARACTERS}/${characterId}/default.jpg`
+    `${StorageDirectoriesEnum.CHARACTERS}/${characterId}/default.jpg`,
   );
 
   useEffect(() => {
@@ -41,9 +35,7 @@ export function CharacterDrawer({ characterId }: CharacterDrawerProps) {
   const characterName = characterData?.name ?? PLACEHOLDER_CHARACTER_NAME;
 
   return (
-    <Box
-      data-testid={CharacterDrawerTestIds.ROOT}
-      className="flex flex-col items-center">
+    <Box data-testid={CharacterDrawerTestIds.ROOT} className="flex flex-col items-center">
       {loading ? (
         <Skeleton
           data-testid={CharacterDrawerTestIds.ROOT_SKELETON}

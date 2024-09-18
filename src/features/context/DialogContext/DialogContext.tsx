@@ -1,11 +1,5 @@
 import { Dialog, DialogContent, DialogProps, DialogTitle } from "@mui/material";
-import {
-  createContext,
-  PropsWithChildren,
-  ReactNode,
-  useContext,
-  useState,
-} from "react";
+import { createContext, PropsWithChildren, ReactNode, useContext, useState } from "react";
 
 export enum DialogIds {
   ROOT = "dialog-root",
@@ -40,10 +34,9 @@ export const DialogProvider = ({ children }: PropsWithChildren) => {
         open={isOpen}
         onClose={closeDialog}
         TransitionProps={{ onExited: clearDialogContent }}
-        {...dialogProps}>
-        {title && (
-          <DialogTitle data-testid={DialogIds.TITLE}>{title}</DialogTitle>
-        )}
+        {...dialogProps}
+      >
+        {title && <DialogTitle data-testid={DialogIds.TITLE}>{title}</DialogTitle>}
         <DialogContent data-testid={DialogIds.CONTENT}>{content}</DialogContent>
       </Dialog>
       {children}

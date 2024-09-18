@@ -20,7 +20,8 @@ describe("DialogProvider", () => {
               content: <div>{faker.lorem.paragraphs()}</div>,
               title: faker.lorem.words(),
             })
-          }>
+          }
+        >
           {openDialogText}
         </button>
         <button onClick={closeDialog}>{closeDialogText}</button>
@@ -32,7 +33,7 @@ describe("DialogProvider", () => {
     render(
       <DialogProvider>
         <TestComponent />
-      </DialogProvider>
+      </DialogProvider>,
     );
 
   it("should open and close the dialog correctly", async () => {

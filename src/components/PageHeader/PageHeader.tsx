@@ -40,13 +40,15 @@ export function PageHeader() {
       data-testid={PageHeaderIds.ROOT}
       alignItems="center"
       justifyContent="space-between"
-      className="flex h-16 px-2 border-gray-100 border-b-2">
+      className="flex h-16 px-2 border-gray-100 border-b-2"
+    >
       <Grid item display="flex">
         <Button
           data-testid={PageHeaderIds.HOME}
           disableRipple
           className="!bg-transparent"
-          onClick={() => router.push("/")}>
+          onClick={() => router.push("/")}
+        >
           <LogoIcon className="pl-1 h-12" />
           <LogoText className="pl-2 h-8" />
         </Button>
@@ -55,21 +57,24 @@ export function PageHeader() {
         <Button
           data-testid={PageHeaderIds.CHARACTER}
           onClick={() => router.push("/character")}
-          {...commonButtonProps}>
+          {...commonButtonProps}
+        >
           Personagem
         </Button>
         {currentUser ? (
           <Button
             data-testid={PageHeaderIds.LOGOUT}
             onClick={logout}
-            {...commonButtonProps}>
+            {...commonButtonProps}
+          >
             Logout
           </Button>
         ) : (
           <Button
             data-testid={PageHeaderIds.LOGIN}
             onClick={signInWithGooglePopup}
-            {...commonButtonProps}>
+            {...commonButtonProps}
+          >
             Login
           </Button>
         )}

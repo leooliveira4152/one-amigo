@@ -13,7 +13,8 @@ export function Logo(props: SVGProps<SVGSVGElement>) {
       data-testid={LogoTestIds.SVG}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="100 110 880 820"
-      {...props}>
+      {...props}
+    >
       <LogoIcon svgElement={false} />
       <LogoText svgElement={false} />
     </svg>

@@ -42,9 +42,7 @@ describe("<CharacterDrawer />", () => {
   describe("Character name rendering", () => {
     it("should render the character name if it was found", async () => {
       const mockCharacterName = faker.person.fullName();
-      jest
-        .mocked(readCharacterDoc)
-        .mockResolvedValueOnce({ name: mockCharacterName });
+      jest.mocked(readCharacterDoc).mockResolvedValueOnce({ name: mockCharacterName });
       const { getByText } = setup();
       await waitFor(() => getByText(mockCharacterName));
     });
