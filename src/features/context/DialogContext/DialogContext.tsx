@@ -33,7 +33,6 @@ export const DialogProvider = ({ children }: PropsWithChildren) => {
   const [content, setContent] = useState<ReactNode>(undefined);
   const [dialogProps, setDialogProps] = useState<Partial<DialogProps>>({});
 
-  // TODO - check mobile
   return (
     <DialogContext.Provider value={{ closeDialog, openDialog }}>
       <Dialog
@@ -51,8 +50,9 @@ export const DialogProvider = ({ children }: PropsWithChildren) => {
     </DialogContext.Provider>
   );
 
-  function openDialog({ content, ...props }: OpenDialogProps) {
+  function openDialog({ content, title, ...props }: OpenDialogProps) {
     setContent(content);
+    setTitle(title);
     setDialogProps(props);
     setIsOpen(true);
   }

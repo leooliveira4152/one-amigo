@@ -56,14 +56,22 @@ describe("DialogProvider", () => {
     await waitFor(() => expect(getByTestId(DialogIds.ROOT)).toBeTruthy());
   });
 
-  it("should clear the dialog content when dialog is closed", async () => {
+  it("should clear the dialog title and content after the dialog is closed", async () => {
     const { queryByTestId, getByText, getByTestId } = setup();
 
     userEvent.click(getByText(openDialogText));
     await waitFor(() => expect(getByTestId(DialogIds.ROOT)).toBeTruthy());
+    getByTestId(DialogIds.TITLE);
+    getByTestId(DialogIds.CONTENT);
+
     userEvent.click(getByText(closeDialogText));
     await waitFor(() => expect(queryByTestId(DialogIds.ROOT)).toBeFalsy());
+    expect(queryByTestId(DialogIds.TITLE)).toBeFalsy();
+    expect(queryByTestId(DialogIds.CONTENT)).toBeFalsy();
+
     userEvent.click(getByText(openDialogText));
     await waitFor(() => expect(getByTestId(DialogIds.ROOT)).toBeTruthy());
+    getByTestId(DialogIds.TITLE);
+    getByTestId(DialogIds.CONTENT);
   });
 });
