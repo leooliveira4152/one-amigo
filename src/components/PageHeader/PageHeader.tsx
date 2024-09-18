@@ -9,7 +9,7 @@ import { useUserStore } from "@/features/store/user";
 
 import { LogoIcon, LogoText } from "../Logo";
 
-export enum HeaderIds {
+export enum PageHeaderIds {
   ROOT = "header-root",
   HOME = "header-home",
   CHARACTER = "header-character",
@@ -17,7 +17,7 @@ export enum HeaderIds {
   LOGOUT = "header-logout",
 }
 
-export function Header() {
+export function PageHeader() {
   const pathname = usePathname();
   const router = useRouter();
   const { logout } = useLogout();
@@ -37,13 +37,13 @@ export function Header() {
   return (
     <Grid
       container
-      data-testid={HeaderIds.ROOT}
+      data-testid={PageHeaderIds.ROOT}
       alignItems="center"
       justifyContent="space-between"
       className="flex h-16 px-2 border-gray-100 border-b-2">
       <Grid item display="flex">
         <Button
-          data-testid={HeaderIds.HOME}
+          data-testid={PageHeaderIds.HOME}
           disableRipple
           className="!bg-transparent"
           onClick={() => router.push("/")}>
@@ -53,21 +53,21 @@ export function Header() {
       </Grid>
       <Grid item>
         <Button
-          data-testid={HeaderIds.CHARACTER}
+          data-testid={PageHeaderIds.CHARACTER}
           onClick={() => router.push("/character")}
           {...commonButtonProps}>
           Personagem
         </Button>
         {currentUser ? (
           <Button
-            data-testid={HeaderIds.LOGOUT}
+            data-testid={PageHeaderIds.LOGOUT}
             onClick={logout}
             {...commonButtonProps}>
             Logout
           </Button>
         ) : (
           <Button
-            data-testid={HeaderIds.LOGIN}
+            data-testid={PageHeaderIds.LOGIN}
             onClick={signInWithGooglePopup}
             {...commonButtonProps}>
             Login

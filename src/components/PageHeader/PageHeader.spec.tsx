@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 import { useUserStore } from "@/features/store/user";
 
-import { Header, HeaderIds } from "./Header";
+import { PageHeader, PageHeaderIds } from "./PageHeader";
 
 const mockUserStore = {
   currentUser: {} as User,
@@ -31,8 +31,8 @@ jest.mock("@/features/store/user", () => ({
   useUserStore: jest.fn(() => mockUserStore),
 }));
 
-describe("<Header />", () => {
-  const setup = () => render(<Header />);
+describe("<PageHeader />", () => {
+  const setup = () => render(<PageHeader />);
 
   describe("root component rendering", () => {
     it("should NOT render the component if user is in login screen", () => {
@@ -57,33 +57,33 @@ describe("<Header />", () => {
 
     it("should render the component if the conditions above aren't matched", () => {
       const { getByTestId } = setup();
-      getByTestId(HeaderIds.ROOT);
+      getByTestId(PageHeaderIds.ROOT);
     });
   });
 
   describe("button rendering", () => {
     it("should render the home button with the proper redirect", () => {
       const { getByTestId } = setup();
-      fireEvent.click(getByTestId(HeaderIds.HOME));
+      fireEvent.click(getByTestId(PageHeaderIds.HOME));
       expect(mockPushRoute).toHaveBeenCalledWith("/");
     });
 
     it("should render the character button with the proper redirect", () => {
       const { getByTestId } = setup();
-      fireEvent.click(getByTestId(HeaderIds.CHARACTER));
+      fireEvent.click(getByTestId(PageHeaderIds.CHARACTER));
       expect(mockPushRoute).toHaveBeenCalledWith("/character");
     });
 
     describe("logout button", () => {
       it("should render the logout button (and NOT the login one) if user is logged (currentUser is defined)", () => {
         const { getByTestId, queryByTestId } = setup();
-        getByTestId(HeaderIds.LOGOUT);
-        expect(queryByTestId(HeaderIds.LOGIN)).toBeFalsy();
+        getByTestId(PageHeaderIds.LOGOUT);
+        expect(queryByTestId(PageHeaderIds.LOGIN)).toBeFalsy();
       });
 
       it("should call logout function from firebase on press", () => {
         const { getByTestId } = setup();
-        fireEvent.click(getByTestId(HeaderIds.LOGOUT));
+        fireEvent.click(getByTestId(PageHeaderIds.LOGOUT));
 
         expect(mockLogout).toHaveBeenCalled();
       });
@@ -96,8 +96,8 @@ describe("<Header />", () => {
           .mockReturnValueOnce({ ...mockUserStore, currentUser: null });
 
         const { getByTestId, queryByTestId } = setup();
-        getByTestId(HeaderIds.LOGIN);
-        expect(queryByTestId(HeaderIds.LOGOUT)).toBeFalsy();
+        getByTestId(PageHeaderIds.LOGIN);
+        expect(queryByTestId(PageHeaderIds.LOGOUT)).toBeFalsy();
       });
 
       it("should call signInWithGooglePopup function from firebase on press", () => {
@@ -106,7 +106,7 @@ describe("<Header />", () => {
           .mockReturnValueOnce({ ...mockUserStore, currentUser: null });
 
         const { getByTestId } = setup();
-        fireEvent.click(getByTestId(HeaderIds.LOGIN));
+        fireEvent.click(getByTestId(PageHeaderIds.LOGIN));
         expect(mockSignInWithGooglePopup).toHaveBeenCalled();
       });
     });

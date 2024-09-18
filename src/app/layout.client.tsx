@@ -12,7 +12,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { PropsWithChildren, useEffect, useMemo, useRef } from "react";
 import { Provider } from "react-redux";
 
-import { Header } from "@/components/Header";
+import { PageHeader } from "@/components/PageHeader";
 import { DialogProvider } from "@/features/context/DialogContext";
 import { DrawerProvider } from "@/features/context/DrawerContext";
 import { auth } from "@/features/firebase/auth/auth";
@@ -67,7 +67,7 @@ export function LayoutWrapper({ children }: PropsWithChildren) {
         <DialogProvider>
           <body className="flex flex-col h-dvh">
             <CssBaseline />
-            <Header />
+            <PageHeader />
             <div className="flex flex-col flex-1 items-center justify-between p-2 h-full sm:p-12">
               {enableRender && children}
             </div>
