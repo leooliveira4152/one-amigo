@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Grid } from "@mui/material";
+import { Button, Grid2 } from "@mui/material";
 import { usePathname, useRouter } from "next/navigation";
 import { ComponentProps } from "react";
 
@@ -35,14 +35,14 @@ export function PageHeader() {
   };
 
   return (
-    <Grid
+    <Grid2
       container
       data-testid={PageHeaderIds.ROOT}
       alignItems="center"
       justifyContent="space-between"
       className="flex h-16 px-2 border-gray-100 border-b-2"
     >
-      <Grid item display="flex">
+      <Grid2 display="flex">
         <Button
           data-testid={PageHeaderIds.HOME}
           disableRipple
@@ -52,8 +52,8 @@ export function PageHeader() {
           <LogoIcon className="pl-1 h-12" />
           <LogoText className="pl-2 h-8" />
         </Button>
-      </Grid>
-      <Grid item>
+      </Grid2>
+      <Grid2>
         <Button
           data-testid={PageHeaderIds.CHARACTER}
           onClick={() => router.push("/character")}
@@ -78,7 +78,7 @@ export function PageHeader() {
             Login
           </Button>
         )}
-      </Grid>
-    </Grid>
+      </Grid2>
+    </Grid2>
   );
 }

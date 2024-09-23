@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Box, Skeleton } from "@mui/material";
+import { Box, Skeleton, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import { FirestoreCharacter, readCharacterDoc } from "@/features/firebase/firestore";
@@ -20,7 +20,7 @@ export function CharacterDrawer({ characterId }: CharacterDrawerProps) {
   const [characterData, setCharacterData] = useState<FirestoreCharacter>();
 
   const { imageUrl, dimensions } = useGetStorageImage(
-    `${StorageDirectoriesEnum.CHARACTERS}/${characterId}/default.jpg`,
+    `${StorageDirectoriesEnum.CHARACTERS}/${characterId}/default.jpg`
   );
 
   useEffect(() => {
@@ -46,7 +46,7 @@ export function CharacterDrawer({ characterId }: CharacterDrawerProps) {
       ) : (
         <>
           <CharacterImage />
-          <h2 className="mt-5">{`${characterName}`}</h2>
+          <Typography className="mt-5">{characterName}</Typography>
         </>
       )}
     </Box>
