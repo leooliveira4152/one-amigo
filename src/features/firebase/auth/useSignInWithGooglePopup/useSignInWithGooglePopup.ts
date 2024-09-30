@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 
 import { useUserStore } from "@/features/store/user";
 
-import { createUser } from "../../firestore/manageUserDoc";
+import { createUser } from "../../firestore";
 import { auth } from "../auth";
 
 const provider = new GoogleAuthProvider();

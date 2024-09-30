@@ -3,7 +3,7 @@ import { renderHook } from "@testing-library/react";
 import { signInWithPopup } from "firebase/auth";
 
 import { useSignInWithGooglePopup } from "./useSignInWithGooglePopup";
-import { createUser } from "../../firestore/manageUserDoc";
+import { createUser } from "../../firestore";
 import { auth } from "../auth";
 
 const mockSetIsSpectator = jest.fn();
@@ -11,7 +11,6 @@ const mockRoutePush = jest.fn();
 const mockLoggedUser = { user: {} };
 
 jest.mock("firebase/firestore");
-jest.mock("../../firestore/manageUserDoc");
 jest.mock("../auth", () => ({ auth: jest.fn() }));
 jest.mock("@/features/store/user", () => ({
   useUserStore: jest.fn(() => ({ setIsSpectator: mockSetIsSpectator })),

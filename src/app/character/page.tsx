@@ -1,5 +1,5 @@
 import { CharacterSheet } from "@/features/characterSheet";
 
-export default function LoginPage() {
+export default function CharacterPage() {
   return <CharacterSheet />;
 }

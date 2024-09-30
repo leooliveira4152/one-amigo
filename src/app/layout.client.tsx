@@ -15,8 +15,9 @@ import { Provider } from "react-redux";
 import { PageHeader } from "@/components/PageHeader";
 import { DialogProvider } from "@/features/context/DialogContext";
 import { DrawerProvider } from "@/features/context/DrawerContext";
+import { SnackbarProvider } from "@/features/context/SnackbarContext";
 import { auth } from "@/features/firebase/auth/auth";
-import { readUser } from "@/features/firebase/firestore/manageUserDoc";
+import { readUser } from "@/features/firebase/firestore";
 import { AppStore, makeStore } from "@/features/store";
 import { useUserStore } from "@/features/store/user";
 
@@ -65,11 +66,13 @@ export function LayoutWrapper({ children }: PropsWithChildren) {
       <DrawerProvider>
         <DialogProvider>
           <body className="flex flex-col h-dvh">
-            <CssBaseline />
-            <PageHeader />
-            <div className="flex flex-col flex-1 items-center justify-between p-2 h-full sm:p-12">
-              {enableRender && children}
-            </div>
+            <SnackbarProvider>
+              <CssBaseline />
+              <PageHeader />
+              <div className="flex flex-col flex-1 items-center justify-between p-2 h-full sm:p-12">
+                {enableRender && children}
+              </div>
+            </SnackbarProvider>
           </body>
         </DialogProvider>
       </DrawerProvider>

@@ -1,7 +1,7 @@
 import { render, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { DrawerProvider, useDrawerContext } from "./DrawerContext"; // Adjust the import path as needed
+import { DrawerProvider, useDrawerContext } from "./DrawerContext";
 
 describe("DrawerProvider", () => {
   const openDrawerText = "Open Drawer";
@@ -32,7 +32,7 @@ describe("DrawerProvider", () => {
     render(
       <DrawerProvider>
         <TestComponent />
-      </DrawerProvider>,
+      </DrawerProvider>
     );
 
   it("should open and close the drawer correctly", async () => {

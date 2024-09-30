@@ -1,3 +1,5 @@
 export * from "./manageUserDoc";
-export * from "./readCharacterDoc";
+export * from "./manageCharacterDoc";
+export * from "./manageAbilityDoc";
+export * from "./manageOrganizationDoc";
 export * from "./types";
