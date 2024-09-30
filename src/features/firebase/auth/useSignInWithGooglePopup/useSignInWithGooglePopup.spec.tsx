@@ -10,6 +10,7 @@ const mockSetIsSpectator = jest.fn();
 const mockRoutePush = jest.fn();
 const mockLoggedUser = { user: {} };
 
+jest.mock("../../firestore");
 jest.mock("firebase/firestore");
 jest.mock("../auth", () => ({ auth: jest.fn() }));
 jest.mock("@/features/store/user", () => ({

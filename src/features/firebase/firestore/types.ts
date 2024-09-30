@@ -9,7 +9,7 @@ export type FirestoreUser = Pick<User, "displayName" | "email" | "uid"> & {
 export type FirestoreCharacter = {
   name: string;
   nickname?: string;
-  ability?: string;
+  ability: string;
   affiliation: { organization: string; roles?: string[] };
 };
 

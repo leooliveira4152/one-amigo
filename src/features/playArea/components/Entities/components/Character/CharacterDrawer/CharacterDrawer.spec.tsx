@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker";
 import { Skeleton } from "@mui/material";
 import { render, waitFor } from "@testing-library/react";
 
-import { readCharacterDoc } from "@/features/firebase/firestore";
+import { FirestoreCharacter, readCharacterDoc } from "@/features/firebase/firestore";
 
 import {
   CharacterDrawer,
@@ -42,7 +42,9 @@ describe("<CharacterDrawer />", () => {
   describe("Character name rendering", () => {
     it("should render the character name if it was found", async () => {
       const mockCharacterName = faker.person.fullName();
-      jest.mocked(readCharacterDoc).mockResolvedValueOnce({ name: mockCharacterName });
+      jest
+        .mocked(readCharacterDoc)
+        .mockResolvedValueOnce({ name: mockCharacterName } as FirestoreCharacter);
       const { getByText } = setup();
       await waitFor(() => getByText(mockCharacterName));
     });
