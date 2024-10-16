@@ -2,7 +2,7 @@ import { User } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 
 import { firestoreDatabase } from "../client";
-import { CollectionsEnum, FirestoreUser } from "../types";
+import { Collections, CollectionsEnum, FirestoreUser } from "../types";
 
 export async function createUser(user: User) {
   if (!user.email) return null;
@@ -25,5 +25,5 @@ export async function readUser(email: string) {
   const userRef = doc(firestoreDatabase, CollectionsEnum.USERS, email);
   const document = await getDoc(userRef);
   if (!document.exists() || !document.data()) return null;
-  return document;
+  return { ...document, data: () => document.data() as Collections["users"] };
 }

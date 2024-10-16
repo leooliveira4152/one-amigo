@@ -1,1 +1,1 @@
-export { createOrganization } from "./manageOrganizationDoc";
+export { useOrganizationDoc } from "./manageOrganizationDoc";

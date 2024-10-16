@@ -3,7 +3,7 @@ import { renderHook } from "@testing-library/react";
 import { KonvaEventObject } from "konva/lib/Node";
 
 import { usePlayAreaStore } from "@/features/store/playArea";
-import { mockInteger } from "@/testUtils";
+import { mockInteger } from "@/test/testUtils";
 
 import { useScrollHandler, SCALE_BY } from "./useScrollHandler";
 
@@ -29,7 +29,7 @@ describe("useScrollHandler", () => {
         })),
       },
       evt: { deltaY },
-    }) as unknown as KonvaEventObject<WheelEvent>;
+    } as unknown as KonvaEventObject<WheelEvent>);
 
   const setup = () => renderHook(useScrollHandler);
 
@@ -57,7 +57,7 @@ describe("useScrollHandler", () => {
     const expectedUpdatedScale = mockCurrentStageScale / SCALE_BY;
 
     expect(mockUsePlayAreaStoreReturn.changeStageScale).toHaveBeenCalledWith(
-      expectedUpdatedScale,
+      expectedUpdatedScale
     );
     expect(mockUsePlayAreaStoreReturn.changeStagePosition).toHaveBeenCalledWith(
       {
@@ -70,7 +70,7 @@ describe("useScrollHandler", () => {
           ((mockPointerPosition.y - mockStagePosition.y) / mockCurrentStageScale) *
             expectedUpdatedScale,
       },
-      expectedUpdatedScale,
+      expectedUpdatedScale
     );
   });
 
@@ -88,7 +88,7 @@ describe("useScrollHandler", () => {
       const expectedUpdatedScale = mockCurrentStageScale * SCALE_BY;
 
       expect(mockUsePlayAreaStoreReturn.changeStageScale).toHaveBeenCalledWith(
-        expectedUpdatedScale,
+        expectedUpdatedScale
       );
       expect(mockUsePlayAreaStoreReturn.changeStagePosition).toHaveBeenCalledWith(
         {
@@ -101,7 +101,7 @@ describe("useScrollHandler", () => {
             ((mockPointerPosition.y - mockStagePosition.y) / mockCurrentStageScale) *
               expectedUpdatedScale,
         },
-        expectedUpdatedScale,
+        expectedUpdatedScale
       );
     });
 
@@ -125,7 +125,7 @@ describe("useScrollHandler", () => {
             mockPointerPosition.y -
             (mockPointerPosition.y - mockStagePosition.y) / mockCurrentStageScale,
         },
-        1,
+        1
       );
     });
   });

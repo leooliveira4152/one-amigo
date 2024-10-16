@@ -4,7 +4,7 @@ import { KonvaEventObject } from "konva/lib/Node";
 
 import { moveCharacter } from "@/features/firebase/database";
 import { Coordinates } from "@/features/playArea";
-import { mockInteger } from "@/testUtils";
+import { mockInteger } from "@/test/testUtils";
 
 import { useDragHandler } from "./useDragHandler";
 
@@ -35,7 +35,7 @@ describe("useDragHandler", () => {
         ...mockCoordinates,
         playAreaKey: mockPlayAreaKey,
         setCoordinates: mockSetCoordinates,
-      }),
+      })
     );
 
   const createMockEvent = (pointerPosition?: Coordinates) =>
@@ -43,7 +43,7 @@ describe("useDragHandler", () => {
       target: {
         getStage: () => ({ getPointerPosition: () => pointerPosition }),
       },
-    }) as unknown as KonvaEventObject<DragEvent>;
+    } as unknown as KonvaEventObject<DragEvent>);
 
   describe("onDragStart", () => {
     it("should call setDragOffset with the expected value", () => {

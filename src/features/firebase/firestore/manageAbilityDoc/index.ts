@@ -1,1 +1,1 @@
-export { createAbility, listAbilities } from "./manageAbilityDoc";
+export { useAbilityDoc } from "./manageAbilityDoc";

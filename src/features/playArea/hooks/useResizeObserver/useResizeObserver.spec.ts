@@ -2,7 +2,7 @@ import { renderHook, waitFor } from "@testing-library/react";
 import { RefObject } from "react";
 
 import { usePlayAreaStore } from "@/features/store/playArea";
-import { mockInteger } from "@/testUtils";
+import { mockInteger } from "@/test/testUtils";
 
 import { useResizeObserver } from "./useResizeObserver";
 import { Dimension } from "../../types";
@@ -31,7 +31,7 @@ global.ResizeObserver = jest.fn(
     ({
       observe: mockObserve,
       disconnect: mockDisconnect,
-    }) as unknown as ResizeObserver,
+    } as unknown as ResizeObserver)
 );
 
 jest.mock("@mui/material", () => ({ debounce: jest.fn((fn) => fn) }));
@@ -47,11 +47,11 @@ describe("useResizeObserver", () => {
       .mocked(global.ResizeObserver)
       .mock.calls[0][0](
         [{ contentRect: stageSize }] as ResizeObserverEntry[],
-        {} as ResizeObserver,
+        {} as ResizeObserver
       );
 
   const updateUsePlayAreaStoreMock = (
-    props: Partial<ReturnType<typeof usePlayAreaStore>>,
+    props: Partial<ReturnType<typeof usePlayAreaStore>>
   ) =>
     jest.mocked(usePlayAreaStore).mockReturnValueOnce({
       ...mockUsePlayAreaStoreReturn,
@@ -71,7 +71,7 @@ describe("useResizeObserver", () => {
     setup();
     mockResizeObserverCall(mockViewSize);
     expect(mockUsePlayAreaStoreReturn.changeStageDimensions).toHaveBeenCalledWith(
-      mockViewSize,
+      mockViewSize
     );
   });
 

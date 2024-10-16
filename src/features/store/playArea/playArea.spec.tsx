@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker";
 import { renderHook } from "@testing-library/react";
 import { Property } from "csstype";
 
-import { mockInteger } from "@/testUtils";
+import { mockInteger } from "@/test/testUtils";
 
 import { playAreaSlice, usePlayAreaStore } from "./playArea";
 import { useAppSelector } from "../store";
@@ -82,7 +82,7 @@ describe("playArea", () => {
       expect(result.current.stageDimensions).toEqual(mockStageDimensions);
       expect(result.current.stageScale).toBe(mockInitialState.playArea.stageScale);
       expect(result.current.stagePosition).toEqual(
-        mockInitialState.playArea.stagePosition,
+        mockInitialState.playArea.stagePosition
       );
     });
 
@@ -91,7 +91,7 @@ describe("playArea", () => {
       const { result } = setup();
       result.current.changePointer(cursorType as Property.Cursor);
       expect(mockDispatch).toHaveBeenCalledWith(
-        playAreaSlice.actions.changePointer(cursorType),
+        playAreaSlice.actions.changePointer(cursorType)
       );
     });
 
@@ -104,7 +104,7 @@ describe("playArea", () => {
       const { result } = setup();
       result.current.changeMapDimensions(mockUpdatedMapDimensions);
       expect(mockDispatch).toHaveBeenCalledWith(
-        playAreaSlice.actions.changeMapDimensions(mockUpdatedMapDimensions),
+        playAreaSlice.actions.changeMapDimensions(mockUpdatedMapDimensions)
       );
     });
 
@@ -117,7 +117,7 @@ describe("playArea", () => {
       const { result } = setup();
       result.current.changeStageDimensions(mockUpdatedMapDimensions);
       expect(mockDispatch).toHaveBeenCalledWith(
-        playAreaSlice.actions.changeStageDimensions(mockUpdatedMapDimensions),
+        playAreaSlice.actions.changeStageDimensions(mockUpdatedMapDimensions)
       );
     });
 
@@ -140,7 +140,7 @@ describe("playArea", () => {
         const { result } = setup();
         result.current.changeStageScale(mockUpdatedScale);
         expect(mockDispatch).toHaveBeenCalledWith(
-          playAreaSlice.actions.changeStageScale(mockUpdatedScale),
+          playAreaSlice.actions.changeStageScale(mockUpdatedScale)
         );
       });
 
@@ -180,7 +180,7 @@ describe("playArea", () => {
               scale = stageDimensions.height / mapDimensions.height;
             else scale = stageDimensions.width / mapDimensions.width;
             expect(mockDispatch).toHaveBeenCalledWith(
-              playAreaSlice.actions.changeStageScale(scale),
+              playAreaSlice.actions.changeStageScale(scale)
             );
           });
 
@@ -191,7 +191,7 @@ describe("playArea", () => {
               forceScale: true,
             });
             expect(mockDispatch).toHaveBeenCalledWith(
-              playAreaSlice.actions.changeStageScale(mockUpdatedScale),
+              playAreaSlice.actions.changeStageScale(mockUpdatedScale)
             );
           });
         });
@@ -228,7 +228,7 @@ describe("playArea", () => {
               scale = stageDimensions.height / mapDimensions.height;
             else scale = stageDimensions.width / mapDimensions.width;
             expect(mockDispatch).toHaveBeenCalledWith(
-              playAreaSlice.actions.changeStageScale(scale),
+              playAreaSlice.actions.changeStageScale(scale)
             );
           });
           it("should change scale if forceScale is true", () => {
@@ -238,7 +238,7 @@ describe("playArea", () => {
               forceScale: true,
             });
             expect(mockDispatch).toHaveBeenCalledWith(
-              playAreaSlice.actions.changeStageScale(mockUpdatedScale),
+              playAreaSlice.actions.changeStageScale(mockUpdatedScale)
             );
           });
         });
@@ -260,7 +260,7 @@ describe("playArea", () => {
         const mockUpdatedPosition = limitPosition;
         result.current.changeStagePosition(mockUpdatedPosition);
         expect(mockDispatch).toHaveBeenCalledWith(
-          playAreaSlice.actions.changeStagePosition(mockUpdatedPosition),
+          playAreaSlice.actions.changeStagePosition(mockUpdatedPosition)
         );
       });
 
@@ -278,7 +278,7 @@ describe("playArea", () => {
         const { result } = setup();
         result.current.changeStagePosition(mockUpdatedPosition, mockUpdatedStagePosition);
         expect(mockDispatch).toHaveBeenCalledWith(
-          playAreaSlice.actions.changeStagePosition(mockUpdatedPosition),
+          playAreaSlice.actions.changeStagePosition(mockUpdatedPosition)
         );
       });
 
@@ -295,7 +295,7 @@ describe("playArea", () => {
               playAreaSlice.actions.changeStagePosition({
                 x: 0,
                 y: mockUpdatedPosition.y,
-              }),
+              })
             );
           });
 
@@ -311,7 +311,7 @@ describe("playArea", () => {
               playAreaSlice.actions.changeStagePosition({
                 x: limitPosition.x,
                 y: mockUpdatedPosition.y,
-              }),
+              })
             );
           });
         });
@@ -328,7 +328,7 @@ describe("playArea", () => {
               playAreaSlice.actions.changeStagePosition({
                 x: mockUpdatedPosition.x,
                 y: 0,
-              }),
+              })
             );
           });
 
@@ -344,7 +344,7 @@ describe("playArea", () => {
               playAreaSlice.actions.changeStagePosition({
                 x: mockUpdatedPosition.x,
                 y: limitPosition.y,
-              }),
+              })
             );
           });
         });

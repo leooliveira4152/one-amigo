@@ -9,13 +9,17 @@ import { useUserStore } from "../store/user";
 
 function AdminContent() {
   return (
-    <Grid2 container className="w-full justify-around">
+    <Grid2 container className="w-full justify-between">
       {[
         <CreateCharacter key={1} />,
         <CreateAbility key={2} />,
         <CreateOrganization key={3} />,
       ].map((element, index) => (
-        <Grid2 key={index} size={3.5} className="p-4 outline-2 outline-white outline">
+        <Grid2
+          key={index}
+          size={3.5}
+          className="mb-8 p-4 outline-2 outline-white outline"
+        >
           {element}
         </Grid2>
       ))}

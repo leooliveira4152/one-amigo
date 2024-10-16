@@ -1,1 +1,1 @@
-export { createCharacter, readCharacterDoc } from "./manageCharacterDoc";
+export { useCharacterDoc } from "./manageCharacterDoc";

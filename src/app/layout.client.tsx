@@ -21,6 +21,8 @@ import { readUser } from "@/features/firebase/firestore";
 import { AppStore, makeStore } from "@/features/store";
 import { useUserStore } from "@/features/store/user";
 
+// TODO - use Typography more (https://mui.com/material-ui/react-typography/)
+
 export function LayoutWrapper({ children }: PropsWithChildren) {
   const theme = createTheme({
     palette: {

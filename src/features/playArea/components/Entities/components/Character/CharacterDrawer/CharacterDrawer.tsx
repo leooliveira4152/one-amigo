@@ -2,8 +2,9 @@
 import { Box, Skeleton, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
-import { FirestoreCharacter, readCharacterDoc } from "@/features/firebase/firestore";
+import { FirestoreCharacter, useCharacterDoc } from "@/features/firebase/firestore";
 import { StorageDirectoriesEnum, useGetStorageImage } from "@/features/firebase/storage";
+import { PLACEHOLDER_MISSING_INFO } from "@/utils";
 
 export enum CharacterDrawerTestIds {
   ROOT = "character-drawer-root",
@@ -12,12 +13,11 @@ export enum CharacterDrawerTestIds {
   IMAGE_SKELETON = "character-drawer-image-skeleton",
 }
 
-export const PLACEHOLDER_CHARACTER_NAME = "???";
-
 type CharacterDrawerProps = { characterId: string };
 export function CharacterDrawer({ characterId }: CharacterDrawerProps) {
   const [loading, setLoading] = useState(true);
   const [characterData, setCharacterData] = useState<FirestoreCharacter>();
+  const { readCharacterDoc } = useCharacterDoc();
 
   const { imageUrl, dimensions } = useGetStorageImage(
     `${StorageDirectoriesEnum.CHARACTERS}/${characterId}/default.jpg`
@@ -30,9 +30,9 @@ export function CharacterDrawer({ characterId }: CharacterDrawerProps) {
       if (result) setCharacterData(result);
     };
     getCharacterData();
-  }, [characterId]);
+  }, [characterId, readCharacterDoc]);
 
-  const characterName = characterData?.name ?? PLACEHOLDER_CHARACTER_NAME;
+  const characterName = characterData?.name ?? PLACEHOLDER_MISSING_INFO;
 
   return (
     <Box data-testid={CharacterDrawerTestIds.ROOT} className="flex flex-col items-center">

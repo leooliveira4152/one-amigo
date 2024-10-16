@@ -1,29 +1,38 @@
-import { addDoc, collection, doc, getDoc } from "firebase/firestore";
+import { addDoc, collection, setDoc } from "firebase/firestore";
+import { useTranslations } from "next-intl";
 import { Path } from "react-hook-form";
 
 import { validateRequiredProperties } from "@/utils";
 
 import { firestoreDatabase } from "../client";
 import { CollectionsEnum, FirestoreCharacter } from "../types";
+import { readDoc } from "../utils";
 
 export const requiredProperties: Path<FirestoreCharacter>[] = [
   "name",
   "ability",
   "affiliation.organization",
+  "deathSave",
 ];
 
-export async function createCharacter(character: FirestoreCharacter) {
-  if (!validateRequiredProperties(character, requiredProperties))
-    throw "Faltam propriedades obrigatórias";
+// TODO - rename files
 
-  const abilityUserRef = collection(firestoreDatabase, CollectionsEnum.CHARACTERS);
-  await addDoc(abilityUserRef, character);
-  return;
-}
+export function useCharacterDoc() {
+  const t = useTranslations("error");
 
-export async function readCharacterDoc(id: string) {
-  const characterRef = doc(firestoreDatabase, CollectionsEnum.CHARACTERS, id);
-  const document = await getDoc(characterRef);
-  if (!document.exists()) return null;
-  return document.data() as FirestoreCharacter;
+  async function createCharacter(character: Omit<FirestoreCharacter, "id">) {
+    const missingProperties = validateRequiredProperties(character, requiredProperties);
+    if (missingProperties.length) throw t("missingProperties");
+
+    const characterCollection = collection(firestoreDatabase, CollectionsEnum.CHARACTERS);
+    const docRef = await addDoc(characterCollection, {});
+    await setDoc(docRef, { ...character, id: docRef.id });
+    return;
+  }
+
+  async function readCharacterDoc(id: string) {
+    return await readDoc<FirestoreCharacter>(CollectionsEnum.CHARACTERS, id);
+  }
+
+  return { createCharacter, readCharacterDoc };
 }

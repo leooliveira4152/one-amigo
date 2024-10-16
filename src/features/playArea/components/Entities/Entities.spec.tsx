@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker";
 import { render } from "@testing-library/react";
 
 import { usePlayAreaStore } from "@/features/store/playArea";
-import { mockInteger } from "@/testUtils";
+import { mockInteger } from "@/test/testUtils";
 
 import { Entities } from "./Entities";
 import { Character } from "./components";

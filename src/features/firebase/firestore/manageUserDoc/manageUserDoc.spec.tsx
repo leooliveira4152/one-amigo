@@ -9,7 +9,7 @@ import {
   setDoc,
 } from "firebase/firestore";
 
-import { generateRandomObject } from "@/testUtils";
+import { generateRandomObject } from "@/test/testUtils";
 
 import { createUser, readUser } from "./manageUserDoc";
 import { firestoreDatabase } from "../client";
@@ -32,7 +32,7 @@ describe("createUser", () => {
     jest
       .mocked(getDoc)
       .mockImplementation(
-        () => ({ exists: () => false }) as unknown as ReturnType<typeof getDoc>,
+        () => ({ exists: () => false } as unknown as ReturnType<typeof getDoc>)
       );
   });
 
@@ -41,7 +41,7 @@ describe("createUser", () => {
     expect(doc).toHaveBeenCalledWith(
       mockFirestore,
       CollectionsEnum.USERS,
-      mockUser.email,
+      mockUser.email
     );
   });
 
@@ -55,7 +55,7 @@ describe("createUser", () => {
     jest
       .mocked(getDoc)
       .mockImplementation(
-        () => ({ exists: () => true }) as unknown as ReturnType<typeof getDoc>,
+        () => ({ exists: () => true } as unknown as ReturnType<typeof getDoc>)
       );
 
     const result = await setup();
@@ -83,14 +83,17 @@ describe("createUser", () => {
 describe("readUser", () => {
   const mockEmail = faker.internet.email();
 
-  it("should return null if doc has no data", async () => {
+  it("should return the proper document if everything is ok", async () => {
+    const mockData = generateRandomObject();
     const mockDocument = {
       exists: () => true,
-      data: generateRandomObject,
+      data: () => mockData,
     } as DocumentSnapshot;
     jest.mocked(getDoc).mockResolvedValueOnce(mockDocument);
 
-    expect(await readUser(mockEmail)).toBe(mockDocument);
+    const result = (await readUser(mockEmail)) as unknown as DocumentSnapshot;
+    expect(result.exists()).toBe(mockDocument.exists());
+    expect(result.data()).toBe(mockDocument.data());
   });
 
   describe("failed cases", () => {
@@ -101,7 +104,7 @@ describe("readUser", () => {
       expect(doc).toHaveBeenCalledWith(
         firestoreDatabase,
         CollectionsEnum.USERS,
-        mockEmail,
+        mockEmail
       );
       expect(getDoc).toHaveBeenCalledWith(mockUserRef);
     };

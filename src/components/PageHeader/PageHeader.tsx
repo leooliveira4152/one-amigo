@@ -2,6 +2,7 @@
 
 import { Button, Grid2 } from "@mui/material";
 import { usePathname, useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { ComponentProps } from "react";
 
 import { useLogout, useSignInWithGooglePopup } from "@/features/firebase/auth";
@@ -18,6 +19,7 @@ export enum PageHeaderIds {
 }
 
 export function PageHeader() {
+  const t = useTranslations("header");
   const pathname = usePathname();
   const router = useRouter();
   const { logout } = useLogout();
@@ -59,7 +61,7 @@ export function PageHeader() {
           onClick={() => router.push("/character")}
           {...commonButtonProps}
         >
-          Personagem
+          {t("openCharacterSheet")}
         </Button>
         {currentUser ? (
           <Button
@@ -67,7 +69,7 @@ export function PageHeader() {
             onClick={logout}
             {...commonButtonProps}
           >
-            Logout
+            {t("logout")}
           </Button>
         ) : (
           <Button
@@ -75,7 +77,7 @@ export function PageHeader() {
             onClick={signInWithGooglePopup}
             {...commonButtonProps}
           >
-            Login
+            {t("login")}
           </Button>
         )}
       </Grid2>

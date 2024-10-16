@@ -1,17 +1,19 @@
 import { Box, Typography } from "@mui/material";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 import { LogoIcon } from "@/components/Logo";
 
-/* eslint-disable @next/next/no-img-element */
 export default function NotFound() {
+  const t = useTranslations("notFound");
+
   return (
     <Box className="flex flex-col justify-center text-center h-full">
       <LogoIcon width={400} height={400} className="mb-10" />
-      <Typography variant="h6">Como você veio parar aqui?</Typography>
+      <Typography variant="h6">{t("message")}</Typography>
       <Link className="mt-3" href="/">
         <Typography variant="h5" className="font-bold text-secondary-light">
-          Tela inicial
+          {t("home")}
         </Typography>
       </Link>
     </Box>

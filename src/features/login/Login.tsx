@@ -2,6 +2,7 @@
 
 import { Box } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 import { Logo } from "@/components/Logo";
 
@@ -19,6 +20,7 @@ export enum LoginTestIds {
 }
 
 export function Login() {
+  const t = useTranslations("login");
   const router = useRouter();
   const { openDialog } = useDialogContext();
   const { setIsSpectator } = useUserStore();
@@ -39,10 +41,10 @@ export function Login() {
         className="flex flex-col h-32 items-center justify-evenly"
       >
         <LoginButton data-testid={LoginTestIds.LOGIN_BUTTON} onClick={logGoogleUser}>
-          Login
+          {t("login")}
         </LoginButton>
         <LoginButton data-testid={LoginTestIds.SPECTATOR_BUTTON} onClick={logAsSpectator}>
-          Entrar como espectador
+          {t("enterAsSpectator")}
         </LoginButton>
       </Box>
     </Box>

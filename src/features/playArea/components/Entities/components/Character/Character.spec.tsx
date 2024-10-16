@@ -6,7 +6,7 @@ import { Circle } from "react-konva";
 import { StorageDirectoriesEnum, useGetStorageImage } from "@/features/firebase/storage";
 import { METER_SIZE } from "@/features/playArea/common";
 import { useUserStore } from "@/features/store/user";
-import { generateRandomObject } from "@/testUtils";
+import { generateRandomObject } from "@/test/testUtils";
 
 import { Character, CIRCUMFERENCE_NORMALIZER } from "./Character";
 import { CharacterDrawer } from "./CharacterDrawer";
@@ -73,12 +73,12 @@ describe("<Character />", () => {
         {...mockCoordinates}
         {...mockCircleProps}
         {...override}
-      />,
+      />
     );
 
   const expectRightGetStorageImageCall = () => {
     expect(useGetStorageImage).toHaveBeenCalledWith(
-      `${StorageDirectoriesEnum.CHARACTERS}/${mockCharacterId}/default_portrait.jpg`,
+      `${StorageDirectoriesEnum.CHARACTERS}/${mockCharacterId}/default_portrait.jpg`
     );
   };
 
@@ -101,7 +101,7 @@ describe("<Character />", () => {
         fillPatternX: mockNormalizedRadius,
         fillPatternY: mockNormalizedRadius,
       }),
-      {},
+      {}
     );
     expect(Circle).toHaveBeenNthCalledWith(
       3,
@@ -110,7 +110,7 @@ describe("<Character />", () => {
         onDragStart: mockOnDragStart,
         onDragEnd: mockOnDragEnd,
       }),
-      {},
+      {}
     );
   });
 
@@ -126,7 +126,7 @@ describe("<Character />", () => {
     expect(Circle).toHaveBeenNthCalledWith(
       3,
       expect.objectContaining({ draggable: true }),
-      {},
+      {}
     );
   });
 
@@ -148,7 +148,7 @@ describe("<Character />", () => {
         fillPatternX: expect.anything(),
         fillPatternY: expect.anything(),
       }),
-      {},
+      {}
     );
   });
 

@@ -2,15 +2,13 @@ import { faker } from "@faker-js/faker";
 import { Skeleton } from "@mui/material";
 import { render, waitFor } from "@testing-library/react";
 
-import { FirestoreCharacter, readCharacterDoc } from "@/features/firebase/firestore";
+import { FirestoreCharacter } from "@/features/firebase/firestore";
+import { PLACEHOLDER_MISSING_INFO } from "@/utils";
 
-import {
-  CharacterDrawer,
-  CharacterDrawerTestIds,
-  PLACEHOLDER_CHARACTER_NAME,
-} from "./CharacterDrawer";
+import { CharacterDrawer, CharacterDrawerTestIds } from "./CharacterDrawer";
 
 const mockCharacterId = faker.string.alpha();
+const mockReadCharacterDoc = jest.fn();
 
 jest.mock("firebase/firestore");
 jest.mock("@mui/material", () => ({
@@ -19,7 +17,7 @@ jest.mock("@mui/material", () => ({
 }));
 
 jest.mock("@/features/firebase/firestore", () => ({
-  readCharacterDoc: jest.fn(() => Promise.resolve()),
+  useCharacterDoc: jest.fn(() => ({ readCharacterDoc: mockReadCharacterDoc })),
 }));
 jest.mock("@/features/firebase/storage", () => ({
   ...jest.requireActual("@/features/firebase/storage"),
@@ -43,7 +41,7 @@ describe("<CharacterDrawer />", () => {
     it("should render the character name if it was found", async () => {
       const mockCharacterName = faker.person.fullName();
       jest
-        .mocked(readCharacterDoc)
+        .mocked(mockReadCharacterDoc)
         .mockResolvedValueOnce({ name: mockCharacterName } as FirestoreCharacter);
       const { getByText } = setup();
       await waitFor(() => getByText(mockCharacterName));
@@ -51,7 +49,7 @@ describe("<CharacterDrawer />", () => {
 
     it("should render an inconclusive name if no character was found", async () => {
       const { getByText } = setup();
-      await waitFor(() => getByText(PLACEHOLDER_CHARACTER_NAME));
+      await waitFor(() => getByText(PLACEHOLDER_MISSING_INFO));
     });
   });
 

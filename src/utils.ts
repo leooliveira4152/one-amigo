@@ -15,10 +15,10 @@ function getNestedValue(obj: NestedObject, path: string): any {
   );
 }
 
-export function validateRequiredProperties(obj: NestedObject, paths: string[]): boolean {
-  return paths.every((path) => {
+export function validateRequiredProperties(obj: NestedObject, paths: string[]): string[] {
+  return paths.filter((path) => {
     const value = getNestedValue(obj, path);
-    return value !== undefined && value !== null && value !== "" && value.length !== 0;
+    return value === undefined || value === null || value === "" || value.length === 0;
   });
 }
 
@@ -33,3 +33,5 @@ export function setKeyToNull<T extends NestedObject>(obj: T, keyPath: string): T
 
   return newObj;
 }
+
+export const PLACEHOLDER_MISSING_INFO = "???";
