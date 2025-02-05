@@ -25,5 +25,8 @@ export async function readUser(email: string) {
   const userRef = doc(firestoreDatabase, CollectionsEnum.USERS, email);
   const document = await getDoc(userRef);
   if (!document.exists() || !document.data()) return null;
-  return { ...document, data: () => document.data() as Collections["users"] };
+  return {
+    ...document,
+    data: () => document.data() as Collections[CollectionsEnum.USERS],
+  };
 }

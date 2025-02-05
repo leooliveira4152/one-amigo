@@ -19,7 +19,7 @@ import {
 const DEFAULT_FORM_VALUES: Omit<FirestoreCharacter, "id"> = {
   name: "",
   nickname: "",
-  ability: "",
+  abilities: [],
   affiliation: { organization: "", roles: [] },
   deathSave: { failed: 0, success: 0 },
 };
@@ -53,17 +53,16 @@ export function CreateCharacter() {
 
   return (
     <Box component="form">
-      <Typography textAlign="center" className="mb-4">
-        {t("title")}
-      </Typography>
+      <Typography className="mb-4 text-center">{t("title")}</Typography>
       <Box display="flex" flexDirection="column" gap={1.5}>
         <FormText control={control} required name="name" label={t("name")} />
         <FormText control={control} name="nickname" label={t("nickname")} />
         <FormSelect
           control={control}
+          multiple
           required
-          name="ability"
-          label={t("ability")}
+          name="abilities"
+          label={t("abilities")}
           onOpen={loadAbilities}
           options={abilitiesData.map(({ id, name }) => ({ label: name, value: id }))}
         />

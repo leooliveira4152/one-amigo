@@ -61,7 +61,7 @@ describe("useCharacterDoc", () => {
   describe("createCharacter", () => {
     const characterObject: Omit<FirestoreCharacter, "id"> = {
       name: faker.person.fullName(),
-      ability: faker.lorem.words(2),
+      abilities: [faker.lorem.words(2), faker.lorem.words(2)],
       affiliation: { organization: faker.lorem.words(2) },
       deathSave: { failed: 0, success: 0 },
     };

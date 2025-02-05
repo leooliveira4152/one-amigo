@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Property } from "csstype";
 
-import { Coordinates, Dimension } from "@/features/playArea";
+import { Coordinates, Dimension } from "@/features/playArea/types";
 
 import { useAppDispatch, useAppSelector } from "../store";
 

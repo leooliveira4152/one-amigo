@@ -12,6 +12,8 @@ const DEFAULT_FORM_VALUES: FirestoreAbility = {
   id: "",
   description: "",
   isMagic: false,
+  attacks: [],
+  features: [],
 };
 
 export function CreateAbility() {
@@ -26,9 +28,7 @@ export function CreateAbility() {
 
   return (
     <Box component="form">
-      <Typography textAlign="center" className="mb-4">
-        {t("title")}
-      </Typography>
+      <Typography className="mb-4 text-center">{t("title")}</Typography>
       <Box display="flex" flexDirection="column" gap={1.5}>
         <FormText control={control} required name="name" label={t("name")} />
         <FormText control={control} required name="id" label={t("id")} />

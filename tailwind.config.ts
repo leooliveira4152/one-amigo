@@ -1,5 +1,6 @@
-import type { Config } from "tailwindcss";
 import { deepPurple, pink } from "@mui/material/colors";
+import type { Config } from "tailwindcss";
+import defaultTheme from "tailwindcss/defaultTheme";
 
 const deepPurpleColors = Object.entries(deepPurple).reduce(
   (previous, [key, value]) => ({ ...previous, [`primary-${key}`]: value }),
@@ -7,7 +8,7 @@ const deepPurpleColors = Object.entries(deepPurple).reduce(
     "primary-dark": deepPurple[700],
     "primary-light": deepPurple[300],
     "primary-main": deepPurple[500],
-  },
+  }
 );
 
 const pinkColors = Object.entries(pink).reduce(
@@ -16,7 +17,7 @@ const pinkColors = Object.entries(pink).reduce(
     "secondary-dark": pink[700],
     "secondary-light": pink[300],
     "secondary-main": pink[500],
-  },
+  }
 );
 
 const config: Config = {
@@ -32,6 +33,17 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
+      fontFamily: {
+        alegreya: ["Alegreya", ...defaultTheme.fontFamily.sans],
+      },
+      fontWeight: {
+        alegreyaRegular: "400",
+        alegreyaMedium: "500",
+        alegreyaSemiBold: "600",
+        alegreyaBold: "700",
+        alegreyaExtraBold: "800",
+        alegreyaBlack: "900",
       },
       colors: { ...deepPurpleColors, ...pinkColors },
     },

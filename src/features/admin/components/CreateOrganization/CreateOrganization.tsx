@@ -28,9 +28,7 @@ export function CreateOrganization() {
 
   return (
     <Box component="form">
-      <Typography textAlign="center" className="mb-4">
-        {t("title")}
-      </Typography>
+      <Typography className="mb-4 text-center">{t("title")}</Typography>
       <Box display="flex" flexDirection="column" gap={1.5}>
         <FormText control={control} required name="name" label={t("name")} />
         <FormText control={control} required name="id" label={t("id")} />

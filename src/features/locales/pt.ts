@@ -1,11 +1,5 @@
-const common = {
-  id: "Id",
-  name: "Nome",
-  roles: "Funções",
-  create: "Criar",
-
-  login: "Login",
-};
+import { common } from "./common";
+import { CharacterAttributes, CharacterCombatStats } from "../firebase/firestore/types";
 
 const ptTranslation = {
   login: {
@@ -16,6 +10,123 @@ const ptTranslation = {
     openCharacterSheet: "Personagem",
     login: common.login,
     logout: "Logout",
+  },
+  characterSheet: {
+    header: {
+      abilities: common.abilities,
+      organization: common.organization,
+    },
+    main: {
+      combatStats: {
+        [CharacterCombatStats.ARMOR]: "Armadura",
+        [CharacterCombatStats.DODGE]: "Esquiva",
+        [CharacterCombatStats.HP]: "HP",
+        [CharacterCombatStats.INITIATIVE]: "Iniciativa",
+        [CharacterCombatStats.SPEED]: "Velocidade",
+      },
+      attributes: {
+        [CharacterAttributes.CHARISMA]: "Carisma",
+        [CharacterAttributes.CONSTITUTION]: "Constituição",
+        [CharacterAttributes.DETERMINATION]: "Determinação",
+        [CharacterAttributes.DEXTERITY]: "Destreza",
+        [CharacterAttributes.INTELLIGENCE]: "Inteligência",
+        [CharacterAttributes.STRENGTH]: "Força",
+        [CharacterAttributes.WISDOM]: "Sabedoria",
+      },
+      skills: {
+        athletics: "Atletismo",
+        acrobatics: "Acrobacia",
+        sleightOfHand: "Prestidigitação", // TODO - better translation?
+        stealth: "Furtividade",
+        arcana: "Arcanismo",
+        history: "História",
+        investigation: "Investigação",
+        nature: "Natureza",
+        religion: "Religião",
+        animalHandling: "Trato de animais", // TODO - better translation?
+        insight: "Intuição",
+        medicine: "Medicina",
+        perception: "Percepção",
+        survival: "Sobrevivência",
+        deception: "Enganação",
+        intimidation: "Intimidação",
+        performance: "Atuação",
+        persuasion: "Persuasão",
+      },
+      deathSave: {
+        title: "Testes de morte",
+        fail: "Falhas",
+        success: "Acertos",
+      },
+    },
+    bottom: {
+      tabs: {
+        titles: {
+          actions: common.actions,
+          spells: common.abilities,
+          inventory: "Inventário",
+          features: "Características",
+          background: "História",
+        },
+      },
+      table: {
+        name: "Nome",
+        time: "Tempo",
+        range: "Alcance",
+        rangeUnit: "m",
+        hitModifier: "Modificador de acerto",
+        savingThrow: "Teste de resistência",
+        effect: "Efeito",
+        damage: "Dano",
+        notes: "Notas",
+        attributes: common.attributesAbv,
+        effectTypes: common.effectTypes,
+      },
+      actions: {
+        tabs: {
+          all: "Todos",
+          actions: common.actions,
+          bonusActions: `${common.actions} bônus`,
+          reaction: "Reações",
+          others: "Outros",
+        },
+        attack: {
+          subtitle: "Ataques por ação: {attacksPerAction}",
+          attack: common.attack,
+          range: "Alcance",
+          rangeUnit: common.distanceUnit,
+          hitModifier: "Acerto",
+          savingThrow: "Teste de resistência",
+          damage: "Dano",
+          notes: "Notas",
+        },
+        valueDisplay: {
+          base: "{value} (Base)",
+          modifier: "{value} ({modifier}% de {attribute})",
+          attributes: common.attributesAbv,
+          damageTypes: common.damageTypes,
+        },
+      },
+      abilities: {
+        tabs: {
+          all: "Todos",
+          cantrip: "Truque",
+          abilityLevel: "Nível {level}",
+        },
+      },
+      inventory: {
+        columns: {
+          equipped: "Equipado",
+          name: "Nome",
+          quantity: "Quantidade",
+          notes: "Notas",
+        },
+      },
+      features: {
+        tabs: { all: "Todos", character: "Personagem" },
+        subtitle: "Características de {feature}",
+      },
+    },
   },
   admin: {
     createAbility: {
@@ -48,8 +159,8 @@ const ptTranslation = {
       title: "Criar personagem",
       name: common.name,
       nickname: "Apelido",
-      ability: "Habilidade",
-      organization: "Organização",
+      abilities: common.abilities,
+      organization: common.organization,
       roles: common.roles,
       submit: common.create,
       success: "Personagem criada com sucesso",

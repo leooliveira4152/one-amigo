@@ -13,6 +13,7 @@
   "dependencies": {
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
+    "@faker-js/faker": "^8.4.1",
     "@mui/material": "^6.1.1",
     "@reduxjs/toolkit": "^2.2.7",
     "firebase": "^10.12.5",
@@ -29,7 +30,6 @@
     "use-image": "^1.1.1"
   },
   "devDependencies": {
-    "@faker-js/faker": "^8.4.1",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.4.8",
     "@testing-library/react": "^16.0.0",

@@ -10,7 +10,7 @@ import { readDoc } from "../utils";
 
 export const requiredProperties: Path<FirestoreCharacter>[] = [
   "name",
-  "ability",
+  "abilities",
   "affiliation.organization",
   "deathSave",
 ];

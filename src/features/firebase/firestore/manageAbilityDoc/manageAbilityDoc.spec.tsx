@@ -43,6 +43,8 @@ describe("useAbilityDoc", () => {
       id: faker.lorem.word(),
       name: faker.lorem.words(2),
       isMagic: faker.datatype.boolean(),
+      attacks: [],
+      features: [],
     };
 
     it("should create the ability accordingly if every required property is present", async () => {

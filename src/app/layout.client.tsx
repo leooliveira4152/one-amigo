@@ -4,24 +4,39 @@
 import { firebaseConfig } from "@/features/firebase/client";
 initializeApp(firebaseConfig);
 
-import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import {
+  Box,
+  CssBaseline,
+  StyledEngineProvider,
+  ThemeProvider,
+  createTheme,
+} from "@mui/material";
 import { deepPurple, pink } from "@mui/material/colors";
 import { initializeApp } from "firebase/app";
-import { User } from "firebase/auth";
-import { usePathname, useRouter } from "next/navigation";
-import { PropsWithChildren, useEffect, useMemo, useRef } from "react";
+import { usePathname } from "next/navigation";
+import { lazy, PropsWithChildren, useMemo, useRef } from "react";
 import { Provider } from "react-redux";
 
-import { PageHeader } from "@/components/PageHeader";
+// import { PageHeader } from "@/components/PageHeader";
 import { DialogProvider } from "@/features/context/DialogContext";
 import { DrawerProvider } from "@/features/context/DrawerContext";
 import { SnackbarProvider } from "@/features/context/SnackbarContext";
-import { auth } from "@/features/firebase/auth/auth";
-import { readUser } from "@/features/firebase/firestore";
 import { AppStore, makeStore } from "@/features/store";
 import { useUserStore } from "@/features/store/user";
 
 // TODO - use Typography more (https://mui.com/material-ui/react-typography/)
+// TODO - use sx more (https://mui.com/system/getting-started/usage/)
+// TODO - change every tailwind workaround to style
+
+// Lazy loading these component keeps firebase from being called without being fully initialized
+const PageHeader = lazy(() =>
+  import("@/components/PageHeader").then((imports) => ({ default: imports.PageHeader }))
+);
+const AccountManagement = lazy(() =>
+  import("./accountManagement").then((imports) => ({
+    default: imports.AccountManagement,
+  }))
+);
 
 export function LayoutWrapper({ children }: PropsWithChildren) {
   const theme = createTheme({
@@ -30,33 +45,14 @@ export function LayoutWrapper({ children }: PropsWithChildren) {
       primary: deepPurple,
       secondary: pink,
     },
+    typography: {},
   });
 
   const {
     spectator: { isSpectator },
-    setIsSpectator,
-    localStorageSpectatorKey,
     currentUser,
-    setCurrentUser,
   } = useUserStore();
-  const router = useRouter();
   const pathname = usePathname();
-
-  useEffect(() => {
-    const isSpectator = Boolean(localStorage.getItem(localStorageSpectatorKey));
-    setIsSpectator(isSpectator);
-
-    const unsubscribe = auth.onAuthStateChanged(async (user) => {
-      // TODO - probably not the best approach
-      if (user && user.email) {
-        const userDoc = await readUser(user.email);
-        setCurrentUser((userDoc?.data() ?? user.toJSON()) as User);
-      } else if (!user && pathname !== "/login" && !isSpectator) router.replace("/login");
-    });
-
-    return () => unsubscribe();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const enableRender = useMemo(() => {
     if (pathname === "/login" || currentUser || isSpectator) return true;
@@ -64,21 +60,37 @@ export function LayoutWrapper({ children }: PropsWithChildren) {
   }, [isSpectator, pathname, currentUser]);
 
   return (
-    <ThemeProvider theme={theme}>
-      <DrawerProvider>
-        <DialogProvider>
-          <body className="flex flex-col h-dvh">
-            <SnackbarProvider>
-              <CssBaseline />
-              <PageHeader />
-              <div className="flex flex-col flex-1 items-center justify-between p-2 h-full sm:p-12">
-                {enableRender && children}
-              </div>
-            </SnackbarProvider>
-          </body>
-        </DialogProvider>
-      </DrawerProvider>
-    </ThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <DrawerProvider>
+          <DialogProvider>
+            <body className="flex flex-col h-dvh max-h-dvh overflow-hidden">
+              <SnackbarProvider>
+                <CssBaseline />
+                <AccountManagement />
+                <PageHeader />
+                <Box
+                  className="flex flex-col flex-1 items-center justify-between p-2 h-full sm:p-12 overflow-auto"
+                  sx={{
+                    "&::-webkit-scrollbar": { width: "0.5em" },
+                    "&::-webkit-scrollbar-track": {
+                      boxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+                      webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+                    },
+                    "&::-webkit-scrollbar-thumb": {
+                      backgroundColor: (theme) => `${theme.palette.primary.dark}B3`,
+                      outline: "1px solid white",
+                    },
+                  }}
+                >
+                  {enableRender && children}
+                </Box>
+              </SnackbarProvider>
+            </body>
+          </DialogProvider>
+        </DrawerProvider>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 }
 

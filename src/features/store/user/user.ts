@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import { FirestoreUser } from "@/features/firebase/firestore";
+import { FirestoreUser } from "@/features/firebase/firestore/types";
 
 import { useAppDispatch, useAppSelector } from "../store";
 
@@ -21,6 +21,8 @@ export const userSlice = createSlice({
   reducers: {
     setCurrentUser: (state, action: PayloadAction<FirestoreUser | null>) => {
       state.currentUser = action.payload;
+      state.spectator.isSpectator = false;
+      localStorage.setItem(LOCAL_STORAGE_SPECTATOR_KEY, "");
     },
     setIsSpectator: (state, action: PayloadAction<boolean>) => {
       state.spectator.isSpectator = action.payload;

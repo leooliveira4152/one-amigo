@@ -30,7 +30,8 @@ export function CharacterDrawer({ characterId }: CharacterDrawerProps) {
       if (result) setCharacterData(result);
     };
     getCharacterData();
-  }, [characterId, readCharacterDoc]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [characterId]);
 
   const characterName = characterData?.name ?? PLACEHOLDER_MISSING_INFO;
 

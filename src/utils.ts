@@ -34,4 +34,22 @@ export function setKeyToNull<T extends NestedObject>(obj: T, keyPath: string): T
   return newObj;
 }
 
+type UnionToIntersection<U> = (U extends unknown ? (k: U) => void : never) extends (
+  k: infer I
+) => void
+  ? I
+  : never;
+
+type Entries<T> = {
+  [K in keyof T]: [K, T[K]];
+}[keyof T][];
+
+export function getObjectEntries<T extends Record<string, unknown>>(
+  object: T
+): Entries<UnionToIntersection<T>> {
+  return Object.entries(object) as Entries<UnionToIntersection<T>>;
+}
+
+export const randomNumber = (multiplier = 10) => Math.round(Math.random() * multiplier);
+
 export const PLACEHOLDER_MISSING_INFO = "???";

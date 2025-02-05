@@ -1,0 +1,1 @@
+export { AttackTable } from "./AttackTable";

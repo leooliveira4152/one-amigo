@@ -1,32 +1,12 @@
-import { User } from "firebase/auth";
+import { FirestoreAbility } from "./manageAbilityDoc/types";
+import { FirestoreCharacter } from "./manageCharacterDoc/types";
+import { FirestoreOrganization } from "./manageOrganizationDoc/types";
+import { FirestoreUser } from "./manageUserDoc/types";
 
-// TODO - when managing multiple collections, properly move the types and functions to collection-based directories
-
-export type FirestoreUser = Pick<User, "displayName" | "email" | "uid"> & {
-  admin?: boolean;
-};
-
-export type FirestoreCharacter = {
-  name: string;
-  nickname?: string;
-  ability: string;
-  affiliation: { organization: string; roles?: string[] };
-};
-
-export type FirestoreOrganization = {
-  id: string;
-  name: string;
-  members: string[];
-  roles: string[];
-  pirateCrew?: boolean;
-};
-
-export type FirestoreAbility = {
-  id: string;
-  name: string;
-  isMagic: boolean;
-  description?: string;
-};
+export * from "./manageAbilityDoc/types";
+export * from "./manageCharacterDoc/types";
+export * from "./manageOrganizationDoc/types";
+export * from "./manageUserDoc/types";
 
 export enum CollectionsEnum {
   CHARACTERS = "characters",
@@ -39,5 +19,7 @@ export type Collections = {
   [CollectionsEnum.USERS]: FirestoreUser;
   [CollectionsEnum.CHARACTERS]: FirestoreCharacter;
   [CollectionsEnum.ORGANIZATIONS]: FirestoreOrganization;
-  [CollectionsEnum.ABILITIES]: FirestoreOrganization;
+  [CollectionsEnum.ABILITIES]: FirestoreAbility;
 };
+
+export type FirestoreSheetFeature = { name: string; description: string };
