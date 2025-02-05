@@ -27,6 +27,7 @@ import { useUserStore } from "@/features/store/user";
 // TODO - use Typography more (https://mui.com/material-ui/react-typography/)
 // TODO - use sx more (https://mui.com/system/getting-started/usage/)
 // TODO - change every tailwind workaround to style
+// TODO - change unnecessary styles to tailwind
 
 // Lazy loading these component keeps firebase from being called without being fully initialized
 const PageHeader = lazy(() =>

@@ -17,13 +17,13 @@ export function CharacterSheetContent() {
   if (!characterData) return null;
 
   return (
-    // 72rem equals 6xl - TODO - mobile support
     <Box
-      className={`w-[76rem] border-[${CONTENT_COLOR}] border-2 uppercase`}
+      className={`w-[76rem] border-[${CONTENT_COLOR}] border-2 uppercase`} // 72rem equals 6xl - TODO - mobile support
       sx={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/character-sheet-bg.png')`,
+        backgroundColor: "#231243", // Arbitrary color to fit the image standard
+        backgroundImage: `url('/character-sheet-bg.png')`,
         backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
+        backgroundSize: "100% auto", // Cover the x-axis, adjust height proportionally
       }}
     >
       <SheetHeader />
