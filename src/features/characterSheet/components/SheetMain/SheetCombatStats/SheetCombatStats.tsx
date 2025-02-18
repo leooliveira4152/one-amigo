@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { CSSProperties, useEffect, useMemo, useRef, useState } from "react";
 
 import {
   CHARACTER_IMAGE_LEFT_MARGIN,
@@ -25,7 +25,7 @@ const GAP = 10;
 const DEFAULT_OFFSET = Math.PI / 3.5;
 const DEFAULT_SPACING = Math.PI / 6;
 
-const INCREMENT_RADIUS = Math.PI / 800;
+const INCREMENT_RADIUS = Math.PI / 600;
 const INTERVAL_MS = 1000 / 15;
 
 type SheetCombatStatsProps<T extends CharacterCombatStats> = {
@@ -42,41 +42,58 @@ export function SheetCombatStats<T extends CharacterCombatStats>({
   const statValue = value?.current ?? PLACEHOLDER_MISSING_INFO;
   const maxHp = (value as FirestoreCharacterCombatStats["hp"])?.max;
 
+  const positionDegree = DEFAULT_SPACING * index - DEFAULT_OFFSET;
+
   return (
     <Box
       position="absolute"
-      top={
-        (CHARACTER_IMAGE_SIZE / 2) *
-        (1 + Math.sin(DEFAULT_SPACING * index - DEFAULT_OFFSET))
-      }
-      left={
-        (CHARACTER_IMAGE_SIZE / 2) *
-          (1 + Math.cos(DEFAULT_SPACING * index - DEFAULT_OFFSET)) +
-        CHARACTER_IMAGE_LEFT_MARGIN
-      }
+      top={Math.floor((CHARACTER_IMAGE_SIZE / 2) * (1 + Math.sin(positionDegree)))}
+      left={Math.floor(
+        (CHARACTER_IMAGE_SIZE / 2) * (1 + Math.cos(positionDegree)) +
+          CHARACTER_IMAGE_LEFT_MARGIN
+      )}
       style={{ transform: "translateX(-50%) translateY(-50%)" }}
     >
       <OrbitAnimation />
       <Box
-        className="flex absolute justify-center items-center rounded-full bg-white bg-opacity-10 w-[66px] h-[66px]"
+        className="flex absolute justify-center items-center rounded-full size-[64px] top-1/2 left-1/2"
         style={{
-          top: "50%",
-          left: "50%",
+          backgroundColor: CONTENT_COLOR,
           transform: "translateX(-50%) translateY(-50%)",
         }}
       >
-        <Typography
-          className={`font-alegreya text-center ${
-            maxHp ? "text-2xl" : "text-5xl mt-[-9px]"
-          } border-0`}
-        >
-          {maxHp ? `${statValue} /${maxHp}` : statValue}
-        </Typography>
+        <StatValue statValue={statValue} maxHp={maxHp} />
       </Box>
       <Typography className="absolute w-full font-alegreya text-center">
         {t(stat)}
       </Typography>
     </Box>
+  );
+}
+
+type StatValueProps = {
+  statValue: number | typeof PLACEHOLDER_MISSING_INFO;
+  maxHp?: number;
+};
+
+function StatValue({ statValue, maxHp }: StatValueProps) {
+  const hasValue = statValue !== PLACEHOLDER_MISSING_INFO;
+
+  // Arbitrary margin values to match Alegreya's font issue with centralized number display
+  let style: CSSProperties = { fontSize: 50, lineHeight: 1 };
+  if (hasValue) {
+    if (maxHp) style = { ...style, fontSize: 24, marginTop: -4 };
+    else if (statValue < 100) style = { ...style, marginTop: -11, marginLeft: 2 };
+    else style = { ...style, fontSize: 40, marginTop: -7, marginLeft: 3 };
+  } else style = { ...style, fontSize: 40 };
+
+  return (
+    <Typography
+      className={`font-alegreya font-medium text-primary-600 text-center`}
+      style={style}
+    >
+      {maxHp ? `${statValue}/ ${maxHp}` : statValue}
+    </Typography>
   );
 }
 

@@ -28,6 +28,9 @@ import { useUserStore } from "@/features/store/user";
 // TODO - use sx more (https://mui.com/system/getting-started/usage/)
 // TODO - change every tailwind workaround to style
 // TODO - change unnecessary styles to tailwind
+// TODO - please create a standard for styling
+// TODO - change pure whites
+// TODO - add rule to sort properties in JSX element
 
 // Lazy loading these component keeps firebase from being called without being fully initialized
 const PageHeader = lazy(() =>

@@ -9,6 +9,7 @@ import { CharacterSheetProvider } from "../context/CharacterSheetContext";
 import { SheetBottom } from "./components/SheetBottom";
 
 // TODO - improve letterSpacing
+// TODO - Alegreya is being declared too many times
 
 export function CharacterSheetContent() {
   const characterData = useCharacterData();
