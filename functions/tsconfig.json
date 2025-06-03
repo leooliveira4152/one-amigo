@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "lib": ["es6"],
+    "module": "commonjs",
+    "noImplicitAny": false,
+    "outDir": "lib",
+    "sourceMap": true,
+    "target": "es6",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "useDefineForClassFields": false
+  },
+  "include": ["src"]
+}

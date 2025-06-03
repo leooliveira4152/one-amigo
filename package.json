@@ -8,7 +8,8 @@
     "start": "next build && next start",
     "lint": "next lint",
     "deploy": "next build && firebase deploy",
-    "test": "jest"
+    "test": "jest",
+    "functions": "firebase emulators:start --only functions"
   },
   "dependencies": {
     "@emotion/react": "^11.13.0",
